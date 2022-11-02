@@ -3,7 +3,6 @@ import turtle
 import random
 import winsound
 import webbrowser
-import linecache
 import tkinter as tk
 from tkinter import ttk
 from tkinter import *
@@ -29,6 +28,7 @@ l.pack()
 speed=2
 boost=0
 skin=1
+music=0
 
 #skinfunc
 def skin1():
@@ -115,9 +115,25 @@ def skinhax():
     label2= Label(root, image = bg)
     label2.place(x = 0,y = 240)
     btt()
+def mono():
+    global skin
+    global bg
+    global label1
+    global label2
+    global music
+    skin=10
+    music=1
+    bg = PhotoImage(file = "mono.gif")
+    label1 = Label(root, image = bg)
+    label1.place(x = 0,y = -1)
+    label2= Label(root, image = bg)
+    label2.place(x = 0,y = 240)
+    btt()
 def skinsc1():
         global skin
+        global music
         skin=7
+        music=2
 def skinsc2():
         global skin
         skin=8
@@ -138,7 +154,7 @@ def start():
     root.quit()
 url="https://youtu.be/dQw4w9WgXcQ"
 def rig():
-    webbrowser.open_new_tab(url)
+    webbrowser.open_new(url)
 
 #difffunc
 def ez():
@@ -195,6 +211,7 @@ skinmenu.add_command(label="Bmogus", command=skin3)
 skinmenu.add_command(label="RMOGUS", command=skin4)
 skinmenu.add_command(label="Egg", command=egg)
 skinmenu.add_command(label="Golden Egg", command=gegg)
+skinmenu.add_command(label="MONO", command=mono)
 menubar.add_cascade(label="Skin", menu=skinmenu)
 
 helpmenu = Menu(menubar, tearoff=0)
@@ -320,9 +337,16 @@ turtle.register_shape('skin3.gif')
 turtle.register_shape('skin4.gif')
 turtle.register_shape('egg.gif')
 turtle.register_shape('gegg.gif')
+turtle.register_shape('mono.gif')
 turtle.register_shape('skin50.gif')
+turtle.register_shape('rick.gif')
 wn.setup(1000,700)
-winsound.PlaySound("main.wav", winsound.SND_ASYNC | winsound.SND_LOOP)
+if(music==0):
+    winsound.PlaySound("main.wav", winsound.SND_ASYNC | winsound.SND_LOOP)
+elif(music==1):
+    winsound.PlaySound("mono.wav", winsound.SND_ASYNC | winsound.SND_LOOP)
+elif(music==2):
+    winsound.PlaySound("rick.wav", winsound.SND_ASYNC | winsound.SND_LOOP)
 if (skin==127):
     n=500000
     o=127
@@ -347,15 +371,15 @@ elif (skin==5):
 elif (skin==6):
     turtle.shape("gegg.gif")
 elif (skin==7):
-    turtle.shape("gegg.gif")
+    turtle.shape("rick.gif")
 elif (skin==8):
     turtle.shape("gegg.gif")
 elif (skin==9):
     turtle.shape("gegg.gif")
 elif (skin==127):
     turtle.shape("skin50.gif")
-else:
-    turtle.shape("skin1.gif")
+elif (skin==10):
+    turtle.shape("mono.gif")
 turtle.shapesize(50,50)
 turtle.penup()
 if(Trail==1):
@@ -370,11 +394,11 @@ rnd2=random.randint(2,9)
 xin=random.randint(0, 7)
 yin=random.randint(0, 3)
 while True:
-        def fxn(a, b):
+        def fxn(a,b):
                 global n
                 a=random.randint(-300,10)
                 b=random.randint(10,300)
-                turtle.setposition(a, b)
+                turtle.setposition(a,b)
                 if(skin==127):
                     n=n*2
                 elif (boost==1):
@@ -394,4 +418,3 @@ while True:
             yin=yin*-0.6
             rnd2=rnd2*-0.5
         turtle.onclick(fxn)
-
