@@ -225,7 +225,7 @@ menubar.add_cascade(label="Help", menu=helpmenu)
 password = tk.StringVar()
 true = 124
 def test():
-    if (tk.StringVar() == true):
+    if tk.StringVar() == '124':
         skinhax()
 def s():
     signin = ttk.Frame(root)
@@ -327,7 +327,6 @@ root.config(menu=menubar)
 root.mainloop()
 
 #screen
-turtle.TurtleScreen._RUNNING=True
 wn=turtle.Screen()
 wn.title(0)
 wn.bgcolor("black")
@@ -417,4 +416,7 @@ while True:
         if (ym==500 or ym==-500):
             yin=yin*-0.6
             rnd2=rnd2*-0.5
-        turtle.onclick(fxn)
+        if (skin==127):
+            turtle.onclick(fxn(rnd1,rnd2))
+        else:
+            turtle.onclick(fxn)
