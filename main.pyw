@@ -29,6 +29,7 @@ speed=2
 boost=0
 skin=1
 music=0
+Auto=0
 
 #skinfunc
 def skin1():
@@ -182,6 +183,17 @@ def hard():
         l.config(font =("Calibri", 14))
         l.pack()
 
+#musicfunc
+def md():
+    global music
+    music=0
+def mm():
+    global music
+    music=1
+def mr():
+    global music
+    music=2
+
 #inzsetupbutton
 def btt():
     button = ttk.Button(root, text="Myth", command=myth)
@@ -198,21 +210,27 @@ btt()
 
 #setupmenubar
 menubar = Menu(root)
-filemenu = Menu(menubar, tearoff=0)
-filemenu.add_command(label="Easy", command=ez)
-filemenu.add_command(label="Normal", command=norm)
-filemenu.add_command(label="Hard", command=hard)
-menubar.add_cascade(label="Difficulty", menu=filemenu)
+diffmenu = Menu(menubar, tearoff=0)
+diffmenu.add_radiobutton(label="Easy", command=ez)
+diffmenu.add_radiobutton(label="Normal", command=norm)
+diffmenu.add_radiobutton(label="Hard", command=hard)
+menubar.add_cascade(label="Difficulty", menu=diffmenu)
 
 skinmenu = Menu(menubar, tearoff=0)
-skinmenu.add_command(label="Pmogus(Default)", command=skin1)
-skinmenu.add_command(label="Pimogus", command=skin2)
-skinmenu.add_command(label="Bmogus", command=skin3)
-skinmenu.add_command(label="RMOGUS", command=skin4)
-skinmenu.add_command(label="Egg", command=egg)
-skinmenu.add_command(label="Golden Egg", command=gegg)
-skinmenu.add_command(label="MONO", command=mono)
+skinmenu.add_radiobutton(label="Pmogus(Default)", command=skin1)
+skinmenu.add_radiobutton(label="Pimogus", command=skin2)
+skinmenu.add_radiobutton(label="Bmogus", command=skin3)
+skinmenu.add_radiobutton(label="RMOGUS", command=skin4)
+skinmenu.add_radiobutton(label="Egg", command=egg)
+skinmenu.add_radiobutton(label="Golden Egg", command=gegg)
+skinmenu.add_radiobutton(label="MONO", command=mono)
 menubar.add_cascade(label="Skin", menu=skinmenu)
+
+musicmenu = Menu(menubar, tearoff=0)
+musicmenu.add_radiobutton(label="CTAC(Default)", command=md)
+musicmenu.add_radiobutton(label="Rick", command=mr)
+musicmenu.add_radiobutton(label="MONO", command=mm)
+menubar.add_cascade(label="Music", menu=musicmenu)
 
 helpmenu = Menu(menubar, tearoff=0)
 helpmenu.add_command(label="Help", command=helpme)
@@ -305,6 +323,24 @@ def nspeed():
         elif (speed<=0):
             tkinter.messagebox.showinfo("Err","Cannot Smaller")
             speed=0
+def Auto():
+    global Auto
+    if(Auto==1):
+        tkinter.messagebox.showinfo("Already Enabled","Already Enabled")
+    elif(Trail==0):
+        Auto=1
+        tkinter.messagebox.showinfo("Enabled","Enabled")
+    else:
+        Auto=1
+def Nauto():
+    global Auto
+    if(Auto==0):
+        tkinter.messagebox.showinfo("Already Disabled","Already Disabled")
+    elif(Auto==1):
+        Auto=0
+        tkinter.messagebox.showinfo("Disabled","Disabled")
+    else:
+        Auto=0
 
 
 #devwindow
@@ -316,9 +352,9 @@ def New_Window():
     Dev = Menu(hax)
     hax.config(menu=Dev)
     hskin = Menu(Dev, tearoff=0)
-    hskin.add_command(label="Skin1", command=skinsc1)
-    hskin.add_command(label="Skin2", command=skinsc2)
-    hskin.add_command(label="Skin3", command=skinsc3)
+    hskin.add_radiobutton(label="Skin1", command=skinsc1)
+    hskin.add_radiobutton(label="Skin2", command=skinsc2)
+    hskin.add_radiobutton(label="Skin3", command=skinsc3)
     Dev.add_cascade(label="Secret Skin", menu=hskin, underline=0)
     button = ttk.Button(hax, text="Boost", command=boost)
     button.place(x=80, y=0)
@@ -332,6 +368,10 @@ def New_Window():
     button.place(x=0, y=60)
     button = ttk.Button(hax, text="NoTrail", command=Notrail)
     button.place(x=80, y=60)
+    button = ttk.Button(hax, text="Enable Auto", command=Auto)
+    button.place(x=0, y=90)
+    button = ttk.Button(hax, text="Disable Auto", command=Nauto)
+    button.place(x=80, y=90)
     button = ttk.Button(hax, text="crr", command=crack)
     button.place(x=0, y=420)
 
@@ -430,7 +470,7 @@ while True:
             xin=xin*-0.4
         if (xm>=800 or xm<=-800, ym>=350 or ym<=-350):
             yin=yin*-0.6
-        if (skin==127):
+        if (Auto==1):
             turtle.onclick(fxn(xin,yin))
         else:
             turtle.onclick(fxn)
