@@ -241,7 +241,7 @@ skinmenu.add_radiobutton(label="RMOGUS", command=skin4)
 skinmenu.add_radiobutton(label="Egg", command=egg)
 skinmenu.add_radiobutton(label="Golden Egg", command=gegg)
 skinmenu.add_radiobutton(label="MONO", command=mono)
-skinmenu.add_radiobutton(label="Ronaldo", command=rolnaldo)
+skinmenu.add_radiobutton(label="Ronaldo", command=ronaldo)
 menubar.add_cascade(label="Skin", menu=skinmenu)
 
 musicmenu = Menu(menubar, tearoff=0)
