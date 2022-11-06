@@ -138,7 +138,7 @@ def ronaldo():
     global music
     skin=11
     music=3
-    bg = PhotoImage(file = "rolnaldo.gif")
+    bg = PhotoImage(file = "ronaldo.gif")
     label1 = Label(root, image = bg)
     label1.place(x = 0,y = -1)
     label2= Label(root, image = bg)
