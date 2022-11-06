@@ -130,6 +130,20 @@ def mono():
     label2= Label(root, image = bg)
     label2.place(x = 0,y = 240)
     btt()
+def rolnaldo():
+    global skin
+    global bg
+    global label1
+    global label2
+    global music
+    skin=11
+    music=3
+    bg = PhotoImage(file = "rolnaldo.gif")
+    label1 = Label(root, image = bg)
+    label1.place(x = 0,y = -1)
+    label2= Label(root, image = bg)
+    label2.place(x = 0,y = 240)
+    btt()
 def skinsc1():
         global skin
         global music
@@ -193,6 +207,9 @@ def mm():
 def mr():
     global music
     music=2
+def mro():
+    global music
+    music=3
 
 #inzsetupbutton
 def btt():
@@ -224,12 +241,14 @@ skinmenu.add_radiobutton(label="RMOGUS", command=skin4)
 skinmenu.add_radiobutton(label="Egg", command=egg)
 skinmenu.add_radiobutton(label="Golden Egg", command=gegg)
 skinmenu.add_radiobutton(label="MONO", command=mono)
+skinmenu.add_radiobutton(label="Rolnaldo", command=rolnaldo)
 menubar.add_cascade(label="Skin", menu=skinmenu)
 
 musicmenu = Menu(menubar, tearoff=0)
 musicmenu.add_radiobutton(label="CTAC(Default)", command=md)
 musicmenu.add_radiobutton(label="Rick", command=mr)
 musicmenu.add_radiobutton(label="MONO", command=mm)
+musicmenu.add_radiobutton(label="Rolnaldo", command=mro)
 menubar.add_cascade(label="Music", menu=musicmenu)
 
 helpmenu = Menu(menubar, tearoff=0)
@@ -396,6 +415,7 @@ turtle.register_shape('gegg.gif')
 turtle.register_shape('mono.gif')
 turtle.register_shape('skin50.gif')
 turtle.register_shape('rick.gif')
+turtle.register_shape('rolnaldo.gif')
 wn.setup(1000,700)
 if(music==0):
     winsound.PlaySound("main.wav", winsound.SND_ASYNC | winsound.SND_LOOP)
@@ -403,6 +423,8 @@ elif(music==1):
     winsound.PlaySound("mono.wav", winsound.SND_ASYNC | winsound.SND_LOOP)
 elif(music==2):
     winsound.PlaySound("rick.wav", winsound.SND_ASYNC | winsound.SND_LOOP)
+elif(music==3):
+    winsound.PlaySound("rol.wav", winsound.SND_ASYNC | winsound.SND_LOOP)
 if (skin==127):
     n=500000
     o=127
@@ -436,6 +458,8 @@ elif (skin==127):
     turtle.shape("skin50.gif")
 elif (skin==10):
     turtle.shape("mono.gif")
+elif (skin==11):
+    turtle.shape("rolnaldo.gif")
 turtle.shapesize(50,50)
 turtle.penup()
 if(Trail==1):
