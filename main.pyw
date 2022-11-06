@@ -10,8 +10,8 @@ import tkinter.messagebox
 
 #tk
 root = tkinter.Tk()
-root.title("Main Menu")
 root.geometry('400x450')
+root.title("Main menu")
 root.resizable(False, False)
 
 #bglabelset
@@ -182,16 +182,16 @@ def hard():
         l.config(font =("Calibri", 14))
         l.pack()
 
-#inzbutton
+#inzsetupbutton
 def btt():
     button = ttk.Button(root, text="Myth", command=myth)
     button.place(x=320, y=420)
     button = ttk.Button(root, text="Easy", command=ez)
-    button.place(x=85, y=60)
+    button.place(x=80, y=60)
     button = ttk.Button(root, text="Normal", command=norm)
     button.place(x=160, y=60)
     button = ttk.Button(root, text="Hard", command=hard)
-    button.place(x=235, y=60)
+    button.place(x=240, y=60)
     button = ttk.Button(root, text="START", command=root.destroy)
     button.place(x=160, y=150)
 btt()
@@ -222,20 +222,34 @@ helpmenu.add_command(label="About", command=about)
 menubar.add_cascade(label="Help", menu=helpmenu)
 
 #p2wset
-password = tk.StringVar()
-true = 124
+crr = "adb"
+passwordvar = tk.StringVar()
+def crack():
+        global passwordvar
+        passwordvar.set('adb')
 def test():
-    if tk.StringVar() == '124':
+    
+    chk = passwordvar.get()
+    if chk == crr:
         skinhax()
+        tkinter.messagebox.showinfo("Correct","Got it man!")
+    else:
+        tkinter.messagebox.showinfo("Invalid","Try to crack? Not that easy")
 def s():
-    signin = ttk.Frame(root)
+    global passwordvar
+    rootbox = tkinter.Toplevel()
+    rootbox.title("Enter Activate code")
+    rootbox.geometry('400x100')
+    signin = ttk.Frame(rootbox)
     signin.pack(padx=5, pady=5, fill='x', expand=False)
     password_label = ttk.Label(signin, text="Enable Code:")
     password_label.pack(fill='x', expand=True)
-    password_entry = ttk.Entry(signin, textvariable=password, show="*")
+    password_entry = ttk.Entry(signin, textvariable = passwordvar, show="*")
+    passwordvar = tk.StringVar()
     password_entry.pack(fill='x', expand=True)
-    login_button = ttk.Button(signin, text="Login", command=skinhax)
+    login_button = ttk.Button(signin, text="Check", command=test)
     login_button.pack(fill='x', expand=True, pady=10)
+
 
 #devfunc
 Trail=0
@@ -292,6 +306,7 @@ def nspeed():
             tkinter.messagebox.showinfo("Err","Cannot Smaller")
             speed=0
 
+
 #devwindow
 def New_Window():
     hax = tk.Toplevel()
@@ -317,6 +332,8 @@ def New_Window():
     button.place(x=0, y=60)
     button = ttk.Button(hax, text="NoTrail", command=Notrail)
     button.place(x=80, y=60)
+    button = ttk.Button(hax, text="crr", command=crack)
+    button.place(x=0, y=420)
 
 #devmenu
 HAXmenu = Menu(menubar, tearoff=0)
@@ -387,8 +404,7 @@ if(Trail==1):
 elif(Trail==0):
     turtle.penup()
 turtle.speed(speed)
-rnd1=random.randint(1,5)
-rnd2=random.randint(2,9)
+
 #boundnclk
 xin=random.randint(0, 7)
 yin=random.randint(0, 3)
@@ -399,7 +415,7 @@ while True:
                 b=random.randint(10,300)
                 turtle.setposition(a,b)
                 if(skin==127):
-                    n=n*2
+                    n=n*7
                 elif (boost==1):
                     n=n*o
                 else:
@@ -407,16 +423,14 @@ while True:
                 turtle.title(n)
         x = turtle.xcor()
         y = turtle.ycor()
-        xm = x+xin+rnd1
-        ym = y+yin+rnd2
+        xm = x+xin+4
+        ym = y+yin+2
         turtle.setposition(xm, ym)
-        if (xm==400 or xm==-400):
+        if (ym>=350 or ym<=-350, xm>=800 or xm<=-800):
             xin=xin*-0.4
-            rnd1=rnd1*-0.3
-        if (ym==500 or ym==-500):
+        if (xm>=800 or xm<=-800, ym>=350 or ym<=-350):
             yin=yin*-0.6
-            rnd2=rnd2*-0.5
         if (skin==127):
-            turtle.onclick(fxn(rnd1,rnd2))
+            turtle.onclick(fxn(xin,yin))
         else:
             turtle.onclick(fxn)
