@@ -438,28 +438,48 @@ wn.title(n)
 #asset
 if (skin==1):
     turtle.shape("skin1.gif")
+    img = tkinter.Image("photo", file = "skin1.gif")
+    turtle._Screen._root.iconphoto(True, img)
 elif (skin==2):
     turtle.shape("skin2.gif")
+    img = tkinter.Image("photo", file = "skin2.gif")
+    turtle._Screen._root.iconphoto(True, img)
 elif (skin==3):
     turtle.shape("skin3.gif")
+    img = tkinter.Image("photo", file = "skin3.gif")
+    turtle._Screen._root.iconphoto(True, img)
 elif (skin==4):
     turtle.shape("skin4.gif")
+    img = tkinter.Image("photo", file = "skin4.gif")
+    turtle._Screen._root.iconphoto(True, img)
 elif (skin==5):
     turtle.shape("egg.gif")
+    img = tkinter.Image("photo", file = "egg.gif")
+    turtle._Screen._root.iconphoto(True, img)
 elif (skin==6):
     turtle.shape("gegg.gif")
+    img = tkinter.Image("photo", file = "gegg.gif")
+    turtle._Screen._root.iconphoto(True, img)
 elif (skin==7):
     turtle.shape("rick.gif")
+    img = tkinter.Image("photo", file = "rick.gif")
+    turtle._Screen._root.iconphoto(True, img)
 elif (skin==8):
     turtle.shape("gegg.gif")
 elif (skin==9):
     turtle.shape("gegg.gif")
 elif (skin==127):
     turtle.shape("skin50.gif")
+    img = tkinter.Image("photo", file = "skin50.gif")
+    turtle._Screen._root.iconphoto(True, img)
 elif (skin==10):
     turtle.shape("mono.gif")
+    img = tkinter.Image("photo", file = "mono.gif")
+    turtle._Screen._root.iconphoto(True, img)
 elif (skin==11):
     turtle.shape("ronaldo.gif")
+    img = tkinter.Image("photo", file = "ronaldo.gif")
+    turtle._Screen._root.iconphoto(True, img)
 turtle.shapesize(50,50)
 turtle.penup()
 if(Trail==1):
