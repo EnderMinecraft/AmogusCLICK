@@ -14,5 +14,8 @@ Using build.bat to build only(insreqlib.bat recommended)
 
 Compiled EXE and resources will be placed in 'output' folder
 
+# Known Issues
+Weird exception when close the game(You can contribute to fix that bug)
+
 # Website
 EnderMinecraft.github.io/home.html
