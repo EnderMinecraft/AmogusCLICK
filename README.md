@@ -12,4 +12,7 @@ or
 
 Using build.bat to build only(insreqlib.bat recommended)
 
+Compiled EXE and resources will be placed in 'output' folder
+
+# Website
 EnderMinecraft.github.io/home.html
