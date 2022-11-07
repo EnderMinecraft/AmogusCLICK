@@ -3,7 +3,7 @@ CLICK THE AMOGUS
 
 Inspired by ClckCTAC.exe by Endermanch
 
-Currently only support 64 bit device(x86 device will be supported soon)
+Good news! Now support both x64 and x86
 
 # Build
 Run insreqlib.bat to install pyinstaller and build 
