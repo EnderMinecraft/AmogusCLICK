@@ -144,6 +144,20 @@ def ronaldo():
     label2= Label(root, image = bg)
     label2.place(x = 0,y = 240)
     btt()
+def chad():
+    global skin
+    global bg
+    global label1
+    global label2
+    global music
+    skin=12
+    music=0
+    bg = PhotoImage(file = "chad.gif")
+    label1 = Label(root, image = bg)
+    label1.place(x = 0,y = -1)
+    label2= Label(root, image = bg)
+    label2.place(x = 0,y = 240)
+    btt()
 def skinsc1():
         global skin
         global music
@@ -242,6 +256,7 @@ skinmenu.add_radiobutton(label="Egg", command=egg)
 skinmenu.add_radiobutton(label="Golden Egg", command=gegg)
 skinmenu.add_radiobutton(label="MONO", command=mono)
 skinmenu.add_radiobutton(label="Ronaldo", command=ronaldo)
+skinmenu.add_radiobutton(label="GigaChad", command=chad)
 menubar.add_cascade(label="Skin", menu=skinmenu)
 
 musicmenu = Menu(menubar, tearoff=0)
@@ -416,6 +431,7 @@ turtle.register_shape('mono.gif')
 turtle.register_shape('skin50.gif')
 turtle.register_shape('rick.gif')
 turtle.register_shape('ronaldo.gif')
+turtle.register_shape('chad.gif')
 wn.setup(1000,700)
 if(music==0):
     winsound.PlaySound("main.wav", winsound.SND_ASYNC | winsound.SND_LOOP)
@@ -479,6 +495,10 @@ elif (skin==10):
 elif (skin==11):
     turtle.shape("ronaldo.gif")
     img = tkinter.Image("photo", file = "ronaldo.gif")
+    turtle._Screen._root.iconphoto(True, img)
+elif (skin==12):
+    turtle.shape("chad.gif")
+    img = tkinter.Image("photo", file = "chad.gif")
     turtle._Screen._root.iconphoto(True, img)
 turtle.shapesize(50,50)
 turtle.penup()
