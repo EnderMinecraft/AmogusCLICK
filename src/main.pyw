@@ -538,3 +538,9 @@ while True:
             turtle.onclick(fxn(xin,yin))
         else:
             turtle.onclick(fxn)
+        def reset():
+            turtle.speed(0)
+            turtle.setposition(0,0)
+            turtle.speed(speed)
+        wn.onkey(reset, "r")
+        wn.listen()
