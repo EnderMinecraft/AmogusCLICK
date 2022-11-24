@@ -7,7 +7,6 @@ import tkinter as tk
 from tkinter import ttk
 from tkinter import *
 import tkinter.messagebox
-
 #tk
 root = tkinter.Tk()
 root.geometry('400x450')
@@ -20,155 +19,105 @@ label1 = Label(root, image = bg)
 label1.place(x = 0,y = -1)
 label2= Label(root, image = bg)
 label2.place(x = 0,y = 240)
-l = Label(root, text = "Gamemode is EASY", bg="grey")
-l.config(font =("Calibri", 14))
+l = Label(root, text = "Gamemode is EASY", bg="indigo")
 l.pack()
-
 #varset
 speed=2
 boost=0
 skin=1
 music=0
 Auto=0
-
+Trail=0
+#bgfunc
+def bgfg():
+    if skin==1:
+        bg = PhotoImage(file = "skin1.gif")
+    elif skin==2:
+        bg = PhotoImage(file = "skin2.gif")
+    elif skin==3:
+        bg = PhotoImage(file = "skin3.gif")
+    elif skin==4:
+        bg = PhotoImage(file = "skin4.gif")
+    elif skin==5:
+        bg = PhotoImage(file = "egg.gif")
+    elif skin==6:
+        bg = PhotoImage(file = "gegg.gif")
+    elif skin==10:
+        bg = PhotoImage(file = "mono.gif")
+        music=1
+    elif skin==11:
+        bg = PhotoImage(file = "ronaldo.gif")
+        music=3
+    elif skin==12:
+        bg = PhotoImage(file = "chad.gif")
+    elif skin==127:
+        bg = PhotoImage(file = "skin50.gif")
+    label1 = Label(root, image = bg)
+    label1.place(x = 0,y = -1)
+    label2= Label(root, image = bg)
+    label2.place(x = 0,y = 240)
 #skinfunc
 def skin1():
     global skin
-    global bg
-    global label1
-    global label2
     skin=1
-    bg = PhotoImage(file = "skin1.gif")
-    label1 = Label(root, image = bg)
-    label1.place(x = 0,y = -1)
-    label2= Label(root, image = bg)
-    label2.place(x = 0,y = 240)
+    bgfg()
     btt()
 def skin2():
     global skin
-    global bg
-    global label1
-    global label2
     skin=2
-    bg = PhotoImage(file = "skin2.gif")
-    label1 = Label(root, image = bg)
-    label1.place(x = 0,y = -1)
-    label2= Label(root, image = bg)
-    label2.place(x = 0,y = 240)
+    bgfg()
     btt()
 def skin3():
     global skin
-    global bg
-    global label1
-    global label2
     skin=3
-    bg = PhotoImage(file = "skin3.gif")
-    label1 = Label(root, image = bg)
-    label1.place(x = 0,y = -1)
-    label2= Label(root, image = bg)
-    label2.place(x = 0,y = 240)
+    bgfg()
     btt()
 def skin4():
     global skin
-    global bg
-    global label1
-    global label2
     skin=4
-    bg = PhotoImage(file = "skin4.gif")
-    label1 = Label(root, image = bg)
-    label1.place(x = 0,y = -1)
-    label2= Label(root, image = bg)
-    label2.place(x = 0,y = 240)
+    bgfg()
     btt()
 def egg():
     global skin
-    global bg
-    global label1
-    global label2
     skin=5
-    bg = PhotoImage(file = "egg.gif")
-    label1 = Label(root, image = bg)
-    label1.place(x = 0,y = -1)
-    label2= Label(root, image = bg)
-    label2.place(x = 0,y = 240)
+    bgfg()
     btt()
 def gegg():
     global skin
-    global bg
-    global label1
-    global label2
     skin=6
-    bg = PhotoImage(file = "gegg.gif")
-    label1 = Label(root, image = bg)
-    label1.place(x = 0,y = -1)
-    label2= Label(root, image = bg)
-    label2.place(x = 0,y = 240)
+    bgfg()
     btt()
 def skinhax():
     global skin
-    global bg
-    global label1
-    global label2
     skin=127
-    bg = PhotoImage(file = "skin50.gif")
-    label1 = Label(root, image = bg)
-    label1.place(x = 0,y = -1)
-    label2= Label(root, image = bg)
-    label2.place(x = 0,y = 240)
+    bgfg()
     btt()
 def mono():
     global skin
-    global bg
-    global label1
-    global label2
-    global music
     skin=10
-    music=1
-    bg = PhotoImage(file = "mono.gif")
-    label1 = Label(root, image = bg)
-    label1.place(x = 0,y = -1)
-    label2= Label(root, image = bg)
-    label2.place(x = 0,y = 240)
+    bgfg()
     btt()
 def ronaldo():
     global skin
-    global bg
-    global label1
-    global label2
-    global music
     skin=11
-    music=3
-    bg = PhotoImage(file = "ronaldo.gif")
-    label1 = Label(root, image = bg)
-    label1.place(x = 0,y = -1)
-    label2= Label(root, image = bg)
-    label2.place(x = 0,y = 240)
+    bgfg()
     btt()
 def chad():
     global skin
-    global bg
-    global label1
-    global label2
-    global music
     skin=12
-    music=0
-    bg = PhotoImage(file = "chad.gif")
-    label1 = Label(root, image = bg)
-    label1.place(x = 0,y = -1)
-    label2= Label(root, image = bg)
-    label2.place(x = 0,y = 240)
+    bgfg()
     btt()
 def skinsc1():
-        global skin
-        global music
-        skin=7
-        music=2
+    global skin
+    global music
+    skin=7
+    music=2
 def skinsc2():
-        global skin
-        skin=8
+    global skin
+    skin=8
 def skinsc3():
-        global skin
-        skin=9
+    global skin
+    skin=9
 
 #miscFunc
 def hidden():
@@ -191,24 +140,21 @@ def ez():
         speed=2
         global l
         l.destroy()
-        l = Label(root, text = "Gamemode is EASY", bg="grey")
-        l.config(font =("Calibri", 14))
+        l = Label(root, text = "Gamemode is EASY", bg="indigo")
         l.pack()
 def norm():
         global speed
         speed=5
         global l
         l.destroy()
-        l = Label(root, text = "Gamemode is NORMAL", bg="grey")
-        l.config(font =("Calibri", 14))
+        l = Label(root, text = "Gamemode is NORMAL", bg="indigo")
         l.pack()
 def hard():
         global speed
         speed=10
         global l
         l.destroy()
-        l = Label(root, text = "Gamemode is HARD", bg="grey")
-        l.config(font =("Calibri", 14))
+        l = Label(root, text = "Gamemode is HARD", bg="indigo")
         l.pack()
 
 #musicfunc
@@ -280,14 +226,13 @@ def crack():
         global passwordvar
         passwordvar.set('adb')
 def test():
-    
     chk = passwordvar.get()
     if chk == crr:
         skinhax()
         tkinter.messagebox.showinfo("Correct","Got it man!")
     else:
         tkinter.messagebox.showinfo("Invalid","Try to crack? Not that easy")
-def s():
+def box():
     global passwordvar
     rootbox = tkinter.Toplevel()
     rootbox.title("Enter Activate code")
@@ -301,85 +246,13 @@ def s():
     password_entry.pack(fill='x', expand=True)
     login_button = ttk.Button(signin, text="Check", command=test)
     login_button.pack(fill='x', expand=True, pady=10)
-
-
-#devfunc
-Trail=0
-def boost():
-    global boost
-    if(boost==1):
-        tkinter.messagebox.showinfo("Already Enabled","Already Enabled")
-    elif(boost==0):
-        boost=1
-        tkinter.messagebox.showinfo("Enabled","Enabled")
-    else:
-        boost=1
-def noboost():
-    global boost
-    if(boost==0):
-        tkinter.messagebox.showinfo("Already Disabled","Already Disabled")
-    elif(boost==1):
-        boost=0
-        tkinter.messagebox.showinfo("Disabled","Disabled")
-    else:
-        boost=0    
-def Trail():
-    global Trail
-    if(Trail==1):
-        tkinter.messagebox.showinfo("Already Enabled","Already Enabled")
-    elif(Trail==0):
-        Trail=1
-        tkinter.messagebox.showinfo("Enabled","Enabled")
-    else:
-        Trail=1
-def Notrail():
-    global Trail
-    if(Trail==0):
-        tkinter.messagebox.showinfo("Already Disabled","Already Disabled")
-    elif(Trail==1):
-        Trail=0
-        tkinter.messagebox.showinfo("Disabled","Disabled")
-    else:
-        Trail=0
-def pspeed():
-        global speed
-        speed=speed+1
-        if(speed<10):
-            tkinter.messagebox.showinfo("Speed is",speed)
-        elif (speed>=10):
-            tkinter.messagebox.showinfo("Err","Cannot Larger")
-            speed=10
-def nspeed():
-        global speed
-        speed=speed-1
-        if(speed>0):
-            tkinter.messagebox.showinfo("Speed is",speed)
-        elif (speed<=0):
-            tkinter.messagebox.showinfo("Err","Cannot Smaller")
-            speed=0
-def Auto():
-    global Auto
-    if(Auto==1):
-        tkinter.messagebox.showinfo("Already Enabled","Already Enabled")
-    elif(Trail==0):
-        Auto=1
-        tkinter.messagebox.showinfo("Enabled","Enabled")
-    else:
-        Auto=1
-def Nauto():
-    global Auto
-    if(Auto==0):
-        tkinter.messagebox.showinfo("Already Disabled","Already Disabled")
-    elif(Auto==1):
-        Auto=0
-        tkinter.messagebox.showinfo("Disabled","Disabled")
-    else:
-        Auto=0
-
-
 #devwindow
-def New_Window():
-    hax = tk.Toplevel()
+ld = Label()
+hax = 0
+def hece():
+    global ld
+    global hax
+    hax = tkinter.Toplevel(None)
     hax.title("Dev Menu")
     hax.geometry('600x450')
     hax.resizable(False, False)
@@ -390,6 +263,8 @@ def New_Window():
     hskin.add_radiobutton(label="Skin2", command=skinsc2)
     hskin.add_radiobutton(label="Skin3", command=skinsc3)
     Dev.add_cascade(label="Secret Skin", menu=hskin, underline=0)
+    ld = Label(hax, text = "Status Bar", bg="indigo")
+    ld.place(x=160, y=0)
     button = ttk.Button(hax, text="Boost", command=boost)
     button.place(x=80, y=0)
     button = ttk.Button(hax, text="Noboost", command=noboost)
@@ -408,11 +283,123 @@ def New_Window():
     button.place(x=80, y=90)
     button = ttk.Button(hax, text="crr", command=crack)
     button.place(x=0, y=420)
+#devfunc
+def boost():
+    global boost
+    global ld
+    global hax
+    if(boost==1):
+        ld.destroy()
+        ld = Label(hax, text = "Boost alr on", bg="indigo")
+        ld.place(x=160, y=0)
+    elif(boost==0):
+        boost=1
+        ld.destroy()
+        ld = Label(hax, text = "Boost:On", bg="indigo")
+        ld.place(x=160, y=0)
+    else:
+        boost=1
+def noboost():
+    global boost
+    global ld
+    if(boost==0):
+        ld.destroy()
+        ld = Label(hax, text = "Boost alr off", bg="indigo")
+        ld.place(x=160, y=0)
+    elif(boost==1):
+        boost=0
+        ld.destroy()
+        ld = Label(hax, text = "Boost:Off", bg="indigo")
+        ld.place(x=160, y=0)
+    else:
+        boost=0
+def Trail():
+    global Trail
+    global ld
+    if(Trail==1):
+        ld.destroy()
+        ld = Label(hax, text = "Trail alr on", bg="indigo")
+        ld.place(x=160, y=0)
+    elif(Trail==0):
+        Trail=1
+        ld.destroy()
+        ld = Label(hax, text = "Trail:On", bg="indigo")
+        ld.place(x=160, y=0)
+    else:
+        Trail=1
+def Notrail():
+    global Trail
+    global ld
+    if(Trail==0):
+        ld.destroy()
+        ld = Label(hax, text = "Trail alr off", bg="indigo")
+        ld.place(x=160, y=0)
+    elif(Trail==1):
+        Trail=0
+        ld.destroy()
+        ld = Label(hax, text = "Trail:Off", bg="indigo")
+        ld.place(x=160, y=0)
+    else:
+        Trail=0
+def pspeed():
+    global speed
+    global ld
+    speed=speed+1
+    if(speed<10):
+        ld.destroy()
+        ld = Label(hax, text = speed, bg="indigo")
+        ld.place(x=160, y=0)
+    elif (speed>=11):
+        ld.destroy()
+        ld = Label(hax, text = "Cant higher", bg="indigo")
+        ld.place(x=160, y=0)
+        speed=0
+def nspeed():
+    global speed
+    global ld
+    speed=speed-1
+    if(speed>0):
+        ld.destroy()
+        ld = Label(hax, text = speed, bg="indigo")
+        ld.place(x=160, y=0)
+    elif (speed<=0):
+        ld.destroy()
+        ld = Label(hax, text = "Cant lower", bg="indigo")
+        ld.place(x=160, y=0)
+        speed=1
+def Auto():
+    global Auto
+    global ld
+    if(Auto==1):
+        ld.destroy()
+        ld = Label(hax, text = "Auto alr on", bg="indigo")
+        ld.place(x=160, y=0)
+    elif(Trail==0):
+        Auto=1
+        ld.destroy()
+        ld = Label(hax, text = "Auto:On", bg="indigo")
+        ld.place(x=160, y=0)
+    else:
+        Auto=1
+def Nauto():
+    global Auto
+    global ld
+    if(Auto==0):
+        ld.destroy()
+        ld = Label(hax, text = "Auto alr off", bg="indigo")
+        ld.place(x=160, y=0)
+    elif(Auto==1):
+        Auto=0
+        ld.destroy()
+        ld = Label(hax, text = "Auto:Off", bg="indigo")
+        ld.place(x=160, y=0)
+    else:
+        Auto=0
 
 #devmenu
 HAXmenu = Menu(menubar, tearoff=0)
-HAXmenu.add_command(label="HAX", command=s)
-HAXmenu.add_command(label="MENU", command=lambda: New_Window())
+HAXmenu.add_command(label="HAX", command=box)
+HAXmenu.add_command(label="MENU", command=lambda: hece())
 menubar.add_cascade(label="HAX", menu=HAXmenu)
 root.config(menu=menubar)
 root.mainloop()
