@@ -19,7 +19,7 @@ label1 = Label(root, image = bg)
 label1.place(x = 0,y = -1)
 label2= Label(root, image = bg)
 label2.place(x = 0,y = 240)
-l = Label(root, text = "Gamemode is EASY", bg="indigo")
+l = Label(root, text = "Gamemode is EASY", bg="indigo", fg='#FFFFFF')
 l.pack()
 #varset
 speed=2
@@ -30,6 +30,11 @@ Auto=0
 Trail=0
 #bgfunc
 def bgfg():
+    global bg
+    global label1
+    global label2
+    label1.destroy()
+    label2.destroy()
     if skin==1:
         bg = PhotoImage(file = "skin1.gif")
     elif skin==2:
@@ -56,6 +61,7 @@ def bgfg():
     label1.place(x = 0,y = -1)
     label2= Label(root, image = bg)
     label2.place(x = 0,y = 240)
+    btt()
 #skinfunc
 def skin1():
     global skin
@@ -140,21 +146,21 @@ def ez():
         speed=2
         global l
         l.destroy()
-        l = Label(root, text = "Gamemode is EASY", bg="indigo")
+        l = Label(root, text = "Gamemode is EASY", bg="indigo", fg='#FFFFFF')
         l.pack()
 def norm():
         global speed
         speed=5
         global l
         l.destroy()
-        l = Label(root, text = "Gamemode is NORMAL", bg="indigo")
+        l = Label(root, text = "Gamemode is NORMAL", bg="indigo", fg='#FFFFFF')
         l.pack()
 def hard():
         global speed
         speed=10
         global l
         l.destroy()
-        l = Label(root, text = "Gamemode is HARD", bg="indigo")
+        l = Label(root, text = "Gamemode is HARD", bg="indigo", fg='#FFFFFF')
         l.pack()
 
 #musicfunc
@@ -222,9 +228,6 @@ menubar.add_cascade(label="Help", menu=helpmenu)
 #p2wset
 crr = "adb"
 passwordvar = tk.StringVar()
-def crack():
-        global passwordvar
-        passwordvar.set('adb')
 def test():
     chk = passwordvar.get()
     if chk == crr:
@@ -247,7 +250,11 @@ def box():
     login_button = ttk.Button(signin, text="Check", command=test)
     login_button.pack(fill='x', expand=True, pady=10)
 #devwindow
-ld = Label()
+ldb = Label()
+lds = Label()
+ldt = Label()
+lda = Label()
+lcr = Label()
 hax = 0
 def hece():
     global ld
@@ -263,8 +270,14 @@ def hece():
     hskin.add_radiobutton(label="Skin2", command=skinsc2)
     hskin.add_radiobutton(label="Skin3", command=skinsc3)
     Dev.add_cascade(label="Secret Skin", menu=hskin, underline=0)
-    ld = Label(hax, text = "Status Bar", bg="indigo")
-    ld.place(x=160, y=0)
+    ldb = Label(hax, text = "Boost:Off", bg="indigo", fg='#FFFFFF')
+    ldb.place(x=160, y=0)
+    lds = Label(hax, text = speed, bg="indigo", fg='#FFFFFF')
+    lds.place(x=160, y=30)
+    ldt = Label(hax, text = "Trail:Off", bg="indigo", fg='#FFFFFF')
+    ldt.place(x=160, y=60)
+    lda = Label(hax, text = "Auto:Off", bg="indigo", fg='#FFFFFF')
+    lda.place(x=160, y=90)
     button = ttk.Button(hax, text="Boost", command=boost)
     button.place(x=80, y=0)
     button = ttk.Button(hax, text="Noboost", command=noboost)
@@ -286,115 +299,121 @@ def hece():
 #devfunc
 def boost():
     global boost
-    global ld
-    global hax
+    global ldb
     if(boost==1):
-        ld.destroy()
-        ld = Label(hax, text = "Boost alr on", bg="indigo")
-        ld.place(x=160, y=0)
+        ldb.destroy()
+        ldb = Label(hax, text = "Boost:On", bg="indigo", fg='#FFFFFF')
+        ldb.place(x=160, y=0)
     elif(boost==0):
         boost=1
-        ld.destroy()
-        ld = Label(hax, text = "Boost:On", bg="indigo")
-        ld.place(x=160, y=0)
+        ldb.destroy()
+        ldb = Label(hax, text = "Boost:On", bg="indigo", fg='#FFFFFF')
+        ldb.place(x=160, y=0)
     else:
         boost=1
 def noboost():
     global boost
-    global ld
+    global ldb
     if(boost==0):
-        ld.destroy()
-        ld = Label(hax, text = "Boost alr off", bg="indigo")
-        ld.place(x=160, y=0)
+        ldb.destroy()
+        ldb = Label(hax, text = "Boost:Off", bg="indigo", fg='#FFFFFF')
+        ldb.place(x=160, y=0)
     elif(boost==1):
         boost=0
-        ld.destroy()
-        ld = Label(hax, text = "Boost:Off", bg="indigo")
-        ld.place(x=160, y=0)
+        ldb.destroy()
+        ldb = Label(hax, text = "Boost:Off", bg="indigo", fg='#FFFFFF')
+        ldb.place(x=160, y=0)
     else:
         boost=0
 def Trail():
     global Trail
-    global ld
+    global ldt
     if(Trail==1):
-        ld.destroy()
-        ld = Label(hax, text = "Trail alr on", bg="indigo")
-        ld.place(x=160, y=0)
+        ldt.destroy()
+        ldt = Label(hax, text = "Trail:On", bg="indigo", fg='#FFFFFF')
+        ldt.place(x=160, y=60)
     elif(Trail==0):
         Trail=1
-        ld.destroy()
-        ld = Label(hax, text = "Trail:On", bg="indigo")
-        ld.place(x=160, y=0)
+        ldt.destroy()
+        ldt = Label(hax, text = "Trail:On", bg="indigo", fg='#FFFFFF')
+        ldt.place(x=160, y=60)
     else:
         Trail=1
 def Notrail():
     global Trail
-    global ld
+    global ldt
     if(Trail==0):
-        ld.destroy()
-        ld = Label(hax, text = "Trail alr off", bg="indigo")
-        ld.place(x=160, y=0)
+        ldt.destroy()
+        ldt = Label(hax, text = "Trail:Off", bg="indigo", fg='#FFFFFF')
+        ldt.place(x=160, y=60)
     elif(Trail==1):
         Trail=0
-        ld.destroy()
-        ld = Label(hax, text = "Trail:Off", bg="indigo")
-        ld.place(x=160, y=0)
+        ldt.destroy()
+        ldt = Label(hax, text = "Trail:Off", bg="indigo", fg='#FFFFFF')
+        ldt.place(x=160, y=60)
     else:
         Trail=0
 def pspeed():
     global speed
-    global ld
+    global lds
     speed=speed+1
     if(speed<10):
-        ld.destroy()
-        ld = Label(hax, text = speed, bg="indigo")
-        ld.place(x=160, y=0)
+        lds.destroy()
+        lds = Label(hax, text = speed, bg="indigo", fg='#FFFFFF')
+        lds.place(x=160, y=30)
     elif (speed>=11):
-        ld.destroy()
-        ld = Label(hax, text = "Cant higher", bg="indigo")
-        ld.place(x=160, y=0)
+        lds.destroy()
+        lds = Label(hax, text = "Cant higher", bg="indigo", fg='#FFFFFF')
+        lds.place(x=160, y=30)
         speed=0
 def nspeed():
     global speed
-    global ld
+    global lds
     speed=speed-1
     if(speed>0):
-        ld.destroy()
-        ld = Label(hax, text = speed, bg="indigo")
-        ld.place(x=160, y=0)
+        lds.destroy()
+        lds = Label(hax, text = speed, bg="indigo", fg='#FFFFFF')
+        lds.place(x=160, y=30)
     elif (speed<=0):
-        ld.destroy()
-        ld = Label(hax, text = "Cant lower", bg="indigo")
-        ld.place(x=160, y=0)
+        lds.destroy()
+        lds = Label(hax, text = "Cant lower", bg="indigo", fg='#FFFFFF')
+        lds.place(x=160, y=30)
         speed=1
 def Auto():
     global Auto
-    global ld
+    global lda
     if(Auto==1):
-        ld.destroy()
-        ld = Label(hax, text = "Auto alr on", bg="indigo")
-        ld.place(x=160, y=0)
+        lda.destroy()
+        lda = Label(hax, text = "Auto:On", bg="indigo", fg='#FFFFFF')
+        lda.place(x=160, y=90)
     elif(Trail==0):
         Auto=1
-        ld.destroy()
-        ld = Label(hax, text = "Auto:On", bg="indigo")
-        ld.place(x=160, y=0)
+        lda.destroy()
+        lda = Label(hax, text = "Auto:On", bg="indigo", fg='#FFFFFF')
+        lda.place(x=160, y=90)
     else:
         Auto=1
 def Nauto():
     global Auto
-    global ld
+    global lda
     if(Auto==0):
-        ld.destroy()
-        ld = Label(hax, text = "Auto alr off", bg="indigo")
-        ld.place(x=160, y=0)
+        lda.destroy()
+        lda = Label(hax, text = "Auto:Off", bg="indigo", fg='#FFFFFF')
+        lda.place(x=160, y=90)
     elif(Auto==1):
         Auto=0
-        ld.destroy()
-        ld = Label(hax, text = "Auto:Off", bg="indigo")
-        ld.place(x=160, y=0)
+        lda.destroy()
+        lda = Label(hax, text = "Auto:Off", bg="indigo", fg='#FFFFFF')
+        lda.place(x=160, y=90)
     else:
         Auto=0
+def crack():
+        global passwordvar
+        global lcr
+        passwordvar.set('adb')
+        lcr.destroy()
+        lcr = Label(hax, text = "Cracked", bg="indigo", fg='#FFFFFF')
+        lcr.place(x=80, y=420)
 
 #devmenu
 HAXmenu = Menu(menubar, tearoff=0)
