@@ -33,6 +33,7 @@ def bgfg():
     global bg
     global label1
     global label2
+    global music
     label1.destroy()
     label2.destroy()
     if skin==1:
@@ -55,6 +56,12 @@ def bgfg():
         music=3
     elif skin==12:
         bg = PhotoImage(file = "chad.gif")
+    elif skin==13:
+        bg = PhotoImage(file = "chip.gif")
+        music=4
+    elif skin==14:
+        bg = PhotoImage(file = "potato.gif")
+        music=4
     elif skin==127:
         bg = PhotoImage(file = "skin50.gif")
     label1 = Label(root, image = bg)
@@ -111,6 +118,16 @@ def ronaldo():
 def chad():
     global skin
     skin=12
+    bgfg()
+    btt()
+def chip():
+    global skin
+    skin=13
+    bgfg()
+    btt()
+def potato():
+    global skin
+    skin=14
     bgfg()
     btt()
 def skinsc1():
@@ -176,6 +193,9 @@ def mr():
 def mro():
     global music
     music=3
+def mch():
+    global music
+    music=4
 
 #inzsetupbutton
 def btt():
@@ -209,6 +229,8 @@ skinmenu.add_radiobutton(label="Golden Egg", command=gegg)
 skinmenu.add_radiobutton(label="MONO", command=mono)
 skinmenu.add_radiobutton(label="Ronaldo", command=ronaldo)
 skinmenu.add_radiobutton(label="GigaChad", command=chad)
+skinmenu.add_radiobutton(label="Chip", command=chip)
+skinmenu.add_radiobutton(label="Potato", command=potato)
 menubar.add_cascade(label="Skin", menu=skinmenu)
 
 musicmenu = Menu(menubar, tearoff=0)
@@ -216,6 +238,7 @@ musicmenu.add_radiobutton(label="CTAC(Default)", command=md)
 musicmenu.add_radiobutton(label="Rick", command=mr)
 musicmenu.add_radiobutton(label="MONO", command=mm)
 musicmenu.add_radiobutton(label="Ronaldo", command=mro)
+musicmenu.add_radiobutton(label="Potato&Chips", command=mch)
 menubar.add_cascade(label="Music", menu=musicmenu)
 
 helpmenu = Menu(menubar, tearoff=0)
@@ -422,9 +445,15 @@ HAXmenu.add_command(label="MENU", command=lambda: hece())
 menubar.add_cascade(label="HAX", menu=HAXmenu)
 root.config(menu=menubar)
 root.mainloop()
-
 #screen
 wn=turtle.Screen()
+canvas = wn.getcanvas()  # or, equivalently: turtle.getcanvas()
+rotwn = canvas.winfo_toplevel()
+def on_close():
+    global running
+    running = False
+rotwn.protocol("WM_DELETE_WINDOW", on_close)
+running = True
 wn.title(0)
 wn.bgcolor("black")
 turtle.register_shape('skin1.gif')
@@ -438,6 +467,8 @@ turtle.register_shape('skin50.gif')
 turtle.register_shape('rick.gif')
 turtle.register_shape('ronaldo.gif')
 turtle.register_shape('chad.gif')
+turtle.register_shape('chip.gif')
+turtle.register_shape('potato.gif')
 wn.setup(1000,700)
 if(music==0):
     winsound.PlaySound("main.wav", winsound.SND_ASYNC | winsound.SND_LOOP)
@@ -447,6 +478,8 @@ elif(music==2):
     winsound.PlaySound("rick.wav", winsound.SND_ASYNC | winsound.SND_LOOP)
 elif(music==3):
     winsound.PlaySound("rol.wav", winsound.SND_ASYNC | winsound.SND_LOOP)
+elif(music==4):
+    winsound.PlaySound("chip.wav", winsound.SND_ASYNC | winsound.SND_LOOP)
 if (skin==127):
     n=500000
     o=127
@@ -506,6 +539,14 @@ elif (skin==12):
     turtle.shape("chad.gif")
     img = tkinter.Image("photo", file = "chad.gif")
     turtle._Screen._root.iconphoto(True, img)
+elif (skin==13):
+    turtle.shape("chip.gif")
+    img = tkinter.Image("photo", file = "chip.gif")
+    turtle._Screen._root.iconphoto(True, img)
+elif (skin==14):
+    turtle.shape("potato.gif")
+    img = tkinter.Image("photo", file = "potato.gif")
+    turtle._Screen._root.iconphoto(True, img)
 turtle.shapesize(50,50)
 turtle.penup()
 if(Trail==1):
@@ -518,35 +559,54 @@ turtle.speed(speed)
 #boundnclk
 xin=random.randint(0, 7)
 yin=random.randint(0, 3)
-while True:
-        def fxn(a,b):
-                global n
-                a=random.randint(-300,10)
-                b=random.randint(10,300)
-                turtle.setposition(a,b)
-                if(skin==127):
-                    n=n*7
-                elif (boost==1):
-                    n=n*o
-                else:
-                    n=n+o
-                turtle.title(n)
-        x = turtle.xcor()
-        y = turtle.ycor()
-        xm = x+xin+4
-        ym = y+yin+2
-        turtle.setposition(xm, ym)
-        if (ym>=350 or ym<=-350, xm>=800 or xm<=-800):
-            xin=xin*-0.4
-        if (xm>=800 or xm<=-800, ym>=350 or ym<=-350):
-            yin=yin*-0.6
-        if (Auto==1):
-            turtle.onclick(fxn(xin,yin))
+while running:
+    if not running:
+        break
+    def fxn(a, b):
+        global n
+        a=random.randint(-300,10)
+        b=random.randint(10,300)
+        turtle.setposition(a, b)
+        if(skin==127):
+            n=n*7
+        elif (boost==1):
+            n=n*o
         else:
-            turtle.onclick(fxn)
-        def reset():
-            turtle.speed(0)
-            turtle.setposition(0,0)
-            turtle.speed(speed)
-        wn.onkey(reset, "r")
-        wn.listen()
+            n=n+o
+        turtle.title(n)
+    if not running:
+        break
+    x = turtle.xcor()
+    y = turtle.ycor()
+    xm = x+xin+4
+    ym = y+yin+2
+    if not running:
+        break
+    turtle.setposition(xm, ym)
+    if not running:
+        break
+    if (ym>=350 or ym<=-350, xm>=800 or xm<=-800):
+        xin=xin*-0.4
+    if not running:
+        break
+    if (xm>=800 or xm<=-800, ym>=350 or ym<=-350):
+        yin=yin*-0.6
+    if not running:
+        break
+    if (Auto==1):
+        turtle.onclick(fxn(xin,yin))
+    else:
+        turtle.onclick(fxn)
+    if not running:
+        break
+    def reset():
+        turtle.speed(0)
+        turtle.setposition(0,0)
+        turtle.speed(speed)
+    if not running:
+        break
+    wn.onkeypress(reset, "r")
+    wn.listen()
+    if not running:
+        break
+
