@@ -7,12 +7,18 @@ import tkinter as tk
 from tkinter import ttk
 from tkinter import *
 import tkinter.messagebox
+import sys
 #tk
 root = tkinter.Tk()
 root.geometry('400x450')
 root.title("Main menu")
 root.resizable(False, False)
 root.iconbitmap('icon.ico')
+exitvar=0
+def on_exit():
+    root.destroy()
+    sys.exit()
+root.protocol("WM_DELETE_WINDOW", on_exit)
 #bglabelset
 bg = PhotoImage(file = "skin1.gif")
 label1 = Label(root, image = bg)
@@ -453,9 +459,9 @@ def on_close():
     global running
     running = False
 rotwn.protocol("WM_DELETE_WINDOW", on_close)
-running = True
 wn.title(0)
 wn.bgcolor("black")
+running = True
 turtle.register_shape('skin1.gif')
 turtle.register_shape('skin2.gif')
 turtle.register_shape('skin3.gif')
@@ -561,7 +567,9 @@ xin=random.randint(0, 7)
 yin=random.randint(0, 3)
 while running:
     if not running:
+        turtle.bye()
         break
+        wn.bye()
     def fxn(a, b):
         global n
         a=random.randint(-300,10)
@@ -575,38 +583,52 @@ while running:
             n=n+o
         turtle.title(n)
     if not running:
+        turtle.bye()
         break
+        wn.bye()
     x = turtle.xcor()
     y = turtle.ycor()
     xm = x+xin+4
     ym = y+yin+2
     if not running:
+        turtle.bye()
         break
+        wn.bye()
     turtle.setposition(xm, ym)
     if not running:
+        turtle.bye()
         break
     if (ym>=350 or ym<=-350, xm>=800 or xm<=-800):
         xin=xin*-0.4
     if not running:
         break
+        wn.bye()
     if (xm>=800 or xm<=-800, ym>=350 or ym<=-350):
         yin=yin*-0.6
     if not running:
+        turtle.bye()
         break
+        wn.bye()
     if (Auto==1):
         turtle.onclick(fxn(xin,yin))
     else:
         turtle.onclick(fxn)
     if not running:
+        turtle.bye()
         break
+        wn.bye()
     def reset():
         turtle.speed(0)
         turtle.setposition(0,0)
         turtle.speed(speed)
     if not running:
+        turtle.bye()
         break
+        wn.bye()
     wn.onkeypress(reset, "r")
     wn.listen()
     if not running:
+        turtle.bye()
         break
+        wn.bye()
 
