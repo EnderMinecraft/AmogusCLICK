@@ -567,6 +567,7 @@ xin=random.randint(0, 7)
 yin=random.randint(0, 3)
 while running:
     if not running:
+        winsound.PlaySound(None, winsound.SND_FILENAME)
         turtle.bye()
         break
         wn.bye()
@@ -583,6 +584,7 @@ while running:
             n=n+o
         turtle.title(n)
     if not running:
+        winsound.PlaySound(None, winsound.SND_FILENAME)
         turtle.bye()
         break
         wn.bye()
@@ -596,16 +598,20 @@ while running:
         wn.bye()
     turtle.setposition(xm, ym)
     if not running:
+        winsound.PlaySound(None, winsound.SND_FILENAME)
         turtle.bye()
         break
+        wn.bye()
     if (ym>=350 or ym<=-350, xm>=800 or xm<=-800):
         xin=xin*-0.4
     if not running:
+        winsound.PlaySound(None, winsound.SND_FILENAME)
         break
         wn.bye()
     if (xm>=800 or xm<=-800, ym>=350 or ym<=-350):
         yin=yin*-0.6
     if not running:
+        winsound.PlaySound(None, winsound.SND_FILENAME)
         turtle.bye()
         break
         wn.bye()
@@ -614,6 +620,7 @@ while running:
     else:
         turtle.onclick(fxn)
     if not running:
+        winsound.PlaySound(None, winsound.SND_FILENAME)
         turtle.bye()
         break
         wn.bye()
@@ -622,12 +629,14 @@ while running:
         turtle.setposition(0,0)
         turtle.speed(speed)
     if not running:
+        winsound.PlaySound(None, winsound.SND_FILENAME)
         turtle.bye()
         break
         wn.bye()
     wn.onkeypress(reset, "r")
     wn.listen()
     if not running:
+        winsound.PlaySound(None, winsound.SND_FILENAME)
         turtle.bye()
         break
         wn.bye()
