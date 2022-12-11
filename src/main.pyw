@@ -62,12 +62,15 @@ def bgfg():
         music=3
     elif skin==12:
         bg = PhotoImage(file = "chad.gif")
+        music=5
     elif skin==13:
         bg = PhotoImage(file = "chip.gif")
         music=4
     elif skin==14:
         bg = PhotoImage(file = "potato.gif")
-        music=4
+    elif skin==15:
+        bg = PhotoImage(file = "brick.gif")
+        music=6
     elif skin==127:
         bg = PhotoImage(file = "skin50.gif")
     label1 = Label(root, image = bg)
@@ -136,6 +139,11 @@ def potato():
     skin=14
     bgfg()
     btt()
+def brick():
+    global skin
+    skin=15
+    bgfg()
+    btt()
 def skinsc1():
     global skin
     global music
@@ -202,6 +210,12 @@ def mro():
 def mch():
     global music
     music=4
+def mad():
+    global music
+    music=5
+def mbr():
+    global music
+    music=6
 
 #inzsetupbutton
 def btt():
@@ -237,6 +251,7 @@ skinmenu.add_radiobutton(label="Ronaldo", command=ronaldo)
 skinmenu.add_radiobutton(label="GigaChad", command=chad)
 skinmenu.add_radiobutton(label="Chip", command=chip)
 skinmenu.add_radiobutton(label="Potato", command=potato)
+skinmenu.add_radiobutton(label="Brick", command=brick)
 menubar.add_cascade(label="Skin", menu=skinmenu)
 
 musicmenu = Menu(menubar, tearoff=0)
@@ -245,6 +260,8 @@ musicmenu.add_radiobutton(label="Rick", command=mr)
 musicmenu.add_radiobutton(label="MONO", command=mm)
 musicmenu.add_radiobutton(label="Ronaldo", command=mro)
 musicmenu.add_radiobutton(label="Potato&Chips", command=mch)
+musicmenu.add_radiobutton(label="Chad", command=mad)
+musicmenu.add_radiobutton(label="Brick", command=mbr)
 menubar.add_cascade(label="Music", menu=musicmenu)
 
 helpmenu = Menu(menubar, tearoff=0)
@@ -475,6 +492,7 @@ turtle.register_shape('ronaldo.gif')
 turtle.register_shape('chad.gif')
 turtle.register_shape('chip.gif')
 turtle.register_shape('potato.gif')
+turtle.register_shape('brick.gif')
 wn.setup(1000,700)
 if(music==0):
     winsound.PlaySound("main.wav", winsound.SND_ASYNC | winsound.SND_LOOP)
@@ -486,6 +504,10 @@ elif(music==3):
     winsound.PlaySound("rol.wav", winsound.SND_ASYNC | winsound.SND_LOOP)
 elif(music==4):
     winsound.PlaySound("chip.wav", winsound.SND_ASYNC | winsound.SND_LOOP)
+elif(music==5):
+    winsound.PlaySound("chad.wav", winsound.SND_ASYNC | winsound.SND_LOOP)
+elif(music==6):
+    winsound.PlaySound("brick.wav", winsound.SND_ASYNC | winsound.SND_LOOP)
 if (skin==127):
     n=500000
     o=127
@@ -553,6 +575,10 @@ elif (skin==14):
     turtle.shape("potato.gif")
     img = tkinter.Image("photo", file = "potato.gif")
     turtle._Screen._root.iconphoto(True, img)
+elif (skin==15):
+    turtle.shape("brick.gif")
+    img = tkinter.Image("photo", file = "brick.gif")
+    turtle._Screen._root.iconphoto(True, img)
 turtle.shapesize(50,50)
 turtle.penup()
 if(Trail==1):
@@ -563,8 +589,8 @@ elif(Trail==0):
 turtle.speed(speed)
 
 #boundnclk
-xin=random.randint(0, 7)
-yin=random.randint(0, 3)
+xin=random.randint(-3, 7)
+yin=random.randint(-2, 3)
 while running:
     if not running:
         winsound.PlaySound(None, winsound.SND_FILENAME)
@@ -573,8 +599,8 @@ while running:
         wn.bye()
     def fxn(a, b):
         global n
-        a=random.randint(-300,10)
-        b=random.randint(10,300)
+        a=random.randint(-600,600)
+        b=random.randint(-400,400)
         turtle.setposition(a, b)
         if(skin==127):
             n=n*7
@@ -640,4 +666,3 @@ while running:
         turtle.bye()
         break
         wn.bye()
-
