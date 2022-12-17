@@ -14,8 +14,10 @@ Using build.bat to build only(insreqlib.bat recommended)
 
 Compiled EXE and resources will be placed in 'output' folder
 
-#Credits
+# Credits
+
 ClickCTAC sound :
+
 Mono: https://www.youtube.com/watch?v=CHw1b_1LVBA
 
 Rickroll: https://www.youtube.com/watch?v=dQw4w9WgXcQ
