@@ -474,11 +474,12 @@ canvas = wn.getcanvas()  # or, equivalently: turtle.getcanvas()
 rotwn = canvas.winfo_toplevel()
 def on_close():
     global running
-    running = False
+    running = 0
 rotwn.protocol("WM_DELETE_WINDOW", on_close)
 wn.title(0)
 wn.bgcolor("black")
-running = True
+running = 1
+paused = 0
 turtle.register_shape('skin1.gif')
 turtle.register_shape('skin2.gif')
 turtle.register_shape('skin3.gif')
@@ -591,52 +592,61 @@ turtle.speed(speed)
 #boundnclk
 xin=random.randint(-3, 7)
 yin=random.randint(-2, 3)
-while running:
-    if not running:
+while running == 1:
+    if (running==0):
         winsound.PlaySound(None, winsound.SND_FILENAME)
         turtle.bye()
         break
         wn.bye()
     def fxn(a, b):
-        global n
-        a=random.randint(-600,600)
-        b=random.randint(-400,400)
-        turtle.setposition(a, b)
-        if(skin==127):
-            n=n*7
-        elif (boost==1):
-            n=n*o
+        if (paused == 0):
+            global n
+            a=random.randint(-600,600)
+            b=random.randint(-400,400)
+            turtle.setposition(a, b)
+            if(skin==127):
+                n=n*7
+            elif (boost==1):
+                n=n*o
+            else:
+                n=n+o
+            turtle.title(n)
         else:
-            n=n+o
-        turtle.title(n)
-    if not running:
+            pass
+    if (running==0):
         winsound.PlaySound(None, winsound.SND_FILENAME)
         turtle.bye()
         break
         wn.bye()
     x = turtle.xcor()
     y = turtle.ycor()
-    xm = x+xin+4
-    ym = y+yin+2
-    if not running:
+    if (paused==0):
+        xm = x+xin+4
+        ym = y+yin+2
+    else:
+        pass
+    if (running==0):
         turtle.bye()
         break
         wn.bye()
-    turtle.setposition(xm, ym)
-    if not running:
+    if (paused==0):
+        turtle.setposition(xm, ym)
+    else:
+        pass
+    if (running==0):
         winsound.PlaySound(None, winsound.SND_FILENAME)
         turtle.bye()
         break
         wn.bye()
     if (ym>=350 or ym<=-350, xm>=800 or xm<=-800):
         xin=xin*-0.4
-    if not running:
+    if (running==0):
         winsound.PlaySound(None, winsound.SND_FILENAME)
         break
         wn.bye()
     if (xm>=800 or xm<=-800, ym>=350 or ym<=-350):
         yin=yin*-0.6
-    if not running:
+    if (running==0):
         winsound.PlaySound(None, winsound.SND_FILENAME)
         turtle.bye()
         break
@@ -645,7 +655,7 @@ while running:
         turtle.onclick(fxn(xin,yin))
     else:
         turtle.onclick(fxn)
-    if not running:
+    if (running==0):
         winsound.PlaySound(None, winsound.SND_FILENAME)
         turtle.bye()
         break
@@ -654,14 +664,87 @@ while running:
         turtle.speed(0)
         turtle.setposition(0,0)
         turtle.speed(speed)
-    if not running:
+    def pause():
+        global paused
+        global running
+        pause = tkinter.Toplevel()
+        paused = 1
+        def cl():
+            global paused
+            paused = 0
+            pause.destroy()
+        pause.protocol("WM_DELETE_WINDOW", cl)
+        def center_window(width=400, height=200):
+            screen_width = pause.winfo_screenwidth()
+            screen_height = pause.winfo_screenheight()
+            x = (screen_width/2) - (width/2)
+            y = (screen_height/2) - (height/2)
+            pause.geometry('%dx%d+%d+%d' % (width, height, x, y))
+        center_window(400,200)
+        pause.title("                                                Paused")
+        pause.resizable(False, False)
+        menubar = Menu(pause)
+        pause.config(menu=menubar)
+        diff = Menu(menubar, tearoff=0)
+        diff.add_radiobutton(label="Easy", command=lambda:turtle.speed(2))
+        diff.add_radiobutton(label="Normal", command=lambda:turtle.speed(5))
+        diff.add_radiobutton(label="Hard", command=lambda:turtle.speed(10))
+        menubar.add_cascade(label="Difficulty", menu=diff)
+        skin = Menu(menubar, tearoff=0)
+        skin.add_radiobutton(label="Pmogus(Default)", command=lambda:turtle.shape("skin1.gif"))
+        skin.add_radiobutton(label="Pimogus", command=lambda:turtle.shape("skin2.gif"))
+        skin.add_radiobutton(label="Bmogus", command=lambda:turtle.shape("skin3.gif"))
+        skin.add_radiobutton(label="RMOGUS", command=lambda:turtle.shape("skin4.gif"))
+        skin.add_radiobutton(label="Egg", command=lambda:turtle.shape("egg.gif"))
+        skin.add_radiobutton(label="Golden Egg", command=lambda:turtle.shape("gegg.gif"))
+        skin.add_radiobutton(label="MONO", command=lambda:turtle.shape("mono.gif"))
+        skin.add_radiobutton(label="Ronaldo", command=lambda:turtle.shape("ronaldo.gif"))
+        skin.add_radiobutton(label="GigaChad", command=lambda:turtle.shape("chad.gif"))
+        skin.add_radiobutton(label="Chip", command=lambda:turtle.shape("chip.gif"))
+        skin.add_radiobutton(label="Potato", command=lambda:turtle.shape("potato.gif"))
+        skin.add_radiobutton(label="Brick", command=lambda:turtle.shape("brick.gif"))
+        menubar.add_cascade(label="Skin", menu=skin)
+        music = Menu(menubar, tearoff=0)
+        music.add_radiobutton(label="CTAC(Default)", command=lambda:winsound.PlaySound('main.wav', winsound.SND_ASYNC | winsound.SND_LOOP))
+        music.add_radiobutton(label="MONO", command=lambda:winsound.PlaySound('mono.wav', winsound.SND_ASYNC | winsound.SND_LOOP))
+        music.add_radiobutton(label="Rick", command=lambda:winsound.PlaySound('rick.wav', winsound.SND_ASYNC | winsound.SND_LOOP))
+        music.add_radiobutton(label="Ronaldo", command=lambda:winsound.PlaySound('rol.wav', winsound.SND_ASYNC | winsound.SND_LOOP))
+        music.add_radiobutton(label="Potato&Chips", command=lambda:winsound.PlaySound('chip.wav', winsound.SND_ASYNC | winsound.SND_LOOP))
+        music.add_radiobutton(label="Chad", command=lambda:winsound.PlaySound('chad.wav', winsound.SND_ASYNC | winsound.SND_LOOP))
+        music.add_radiobutton(label="Brick", command=lambda:winsound.PlaySound('brick.wav', winsound.SND_ASYNC | winsound.SND_LOOP))
+        menubar.add_cascade(label="Music", menu=music)
+        def rpl():
+            turtle.speed(0)
+            turtle.setpos(0, 0)
+            n=0
+            wn.title(n)
+            turtle.speed(speed)
+        def end():
+            global running
+            running = 0
+            cl()
+        style = ttk.Style()
+        button = ttk.Button(pause, text="Continue", command=cl, style="cn.TButton")
+        button.place(x=110, y=0)
+        button = ttk.Button(pause, text="Restart", command=rpl, style="rs.TButton")
+        button.place(x=110, y=50)
+        button = ttk.Button(pause, text="Exit", command=end, style="end.TButton")
+        button.place(x=110, y=100)
+        style.configure('cn.TButton', font=(None, 20), foreground="blue4")
+        style.configure('rs.TButton', font=(None, 20), foreground="green4")
+        style.configure('end.TButton', font=(None, 20), foreground="red4")
+    if (running==0):
         winsound.PlaySound(None, winsound.SND_FILENAME)
         turtle.bye()
         break
         wn.bye()
-    wn.onkeypress(reset, "r")
-    wn.listen()
-    if not running:
+    if (paused == 0):
+        wn.onkeypress(reset, "r")
+        wn.onkeypress(pause, "Escape")
+        wn.listen()
+    else:
+        pass
+    if (running==0):
         winsound.PlaySound(None, winsound.SND_FILENAME)
         turtle.bye()
         break
