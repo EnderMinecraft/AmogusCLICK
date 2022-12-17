@@ -16,7 +16,7 @@ Compiled EXE and resources will be placed in 'output' folder
 
 # Credits
 
-ClickCTAC sound :
+ClickCTAC sound : https://www.youtube.com/watch?v=GyF4-A1ZVGM
 
 Mono: https://www.youtube.com/watch?v=CHw1b_1LVBA
 
