@@ -1,13 +1,9 @@
 #import
-import turtle
-import random
-import winsound
-import webbrowser
+import turtle, random, winsound, webbrowser, sys, base64, string
 import tkinter as tk
 from tkinter import ttk
 from tkinter import *
 import tkinter.messagebox
-import sys
 #tk
 root = tkinter.Tk()
 root.geometry('400x450')
@@ -71,6 +67,8 @@ def bgfg():
     elif skin==15:
         bg = PhotoImage(file = "brick.gif")
         music=6
+    elif skin==16:
+        bg = PhotoImage(file = "cat.gif")
     elif skin==127:
         bg = PhotoImage(file = "skin50.gif")
     label1 = Label(root, image = bg)
@@ -155,12 +153,16 @@ def skinsc2():
 def skinsc3():
     global skin
     skin=9
-
+def cat():
+    global skin
+    skin=16
+    bgfg()
+    btt()
 #miscFunc
 def hidden():
     tkinter.messagebox.showinfo("hi", "hi")
 def myth():
-     tkinter.messagebox.showinfo("369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369",  "369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369" )
+        tkinter.messagebox.showinfo("369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369",  "369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369" )
 def about():
     tkinter.messagebox.showinfo("About","Made with fun by EnderMCDev")
 def helpme():
@@ -252,6 +254,7 @@ skinmenu.add_radiobutton(label="GigaChad", command=chad)
 skinmenu.add_radiobutton(label="Chip", command=chip)
 skinmenu.add_radiobutton(label="Potato", command=potato)
 skinmenu.add_radiobutton(label="Brick", command=brick)
+skinmenu.add_radiobutton(label="Cat", command=cat)
 menubar.add_cascade(label="Skin", menu=skinmenu)
 
 musicmenu = Menu(menubar, tearoff=0)
@@ -272,29 +275,37 @@ helpmenu.add_command(label="About", command=about)
 menubar.add_cascade(label="Help", menu=helpmenu)
 
 #p2wset
-crr = "adb"
-passwordvar = tk.StringVar()
+txt = string.ascii_letters + string.digits
+cod = ''.join(random.choice(txt) for i in range(16))
+print(cod)
+cod16 = base64.b16encode(cod.encode('utf-8'))
+cod16 = cod16.decode("utf-8")
+password_entry = Entry()
 def test():
-    chk = passwordvar.get()
-    if chk == crr:
+    global password_entry, value
+    value = str(password_entry.get())
+    if value == cod:
         skinhax()
         tkinter.messagebox.showinfo("Correct","Got it man!")
+    elif value == "SHOW":
+        tkinter.messagebox.showinfo("ACTCODE",cod)
     else:
         tkinter.messagebox.showinfo("Invalid","Try to crack? Not that easy")
 def box():
-    global passwordvar
+    global password_entry
     rootbox = tkinter.Toplevel()
     rootbox.title("Enter Activate code")
-    rootbox.geometry('400x100')
+    rootbox.geometry('400x150')
     signin = ttk.Frame(rootbox)
     signin.pack(padx=5, pady=5, fill='x', expand=False)
     password_label = ttk.Label(signin, text="Enable Code:")
     password_label.pack(fill='x', expand=True)
-    password_entry = ttk.Entry(signin, textvariable = passwordvar, show="*")
-    passwordvar = tk.StringVar()
+    password_entry = ttk.Entry(signin, show="*")
     password_entry.pack(fill='x', expand=True)
     login_button = ttk.Button(signin, text="Check", command=test)
     login_button.pack(fill='x', expand=True, pady=10)
+    reqb = ttk.Button(signin, text="Request Code", command=lambda:tk.messagebox.showinfo("RequestCode", cod16))
+    reqb.pack(fill='x', expand=True, pady=10)
 #devwindow
 ldb = Label()
 lds = Label()
@@ -340,8 +351,6 @@ def hece():
     button.place(x=0, y=90)
     button = ttk.Button(hax, text="Disable Auto", command=Nauto)
     button.place(x=80, y=90)
-    button = ttk.Button(hax, text="crr", command=crack)
-    button.place(x=0, y=420)
 #devfunc
 def boost():
     global boost
@@ -453,13 +462,6 @@ def Nauto():
         lda.place(x=160, y=90)
     else:
         Auto=0
-def crack():
-        global passwordvar
-        global lcr
-        passwordvar.set('adb')
-        lcr.destroy()
-        lcr = Label(hax, text = "Cracked", bg="indigo", fg='#FFFFFF')
-        lcr.place(x=80, y=420)
 
 #devmenu
 HAXmenu = Menu(menubar, tearoff=0)
@@ -494,6 +496,7 @@ turtle.register_shape('chad.gif')
 turtle.register_shape('chip.gif')
 turtle.register_shape('potato.gif')
 turtle.register_shape('brick.gif')
+turtle.register_shape('cat.gif')
 wn.setup(1000,700)
 if(music==0):
     winsound.PlaySound("main.wav", winsound.SND_ASYNC | winsound.SND_LOOP)
@@ -580,6 +583,10 @@ elif (skin==15):
     turtle.shape("brick.gif")
     img = tkinter.Image("photo", file = "brick.gif")
     turtle._Screen._root.iconphoto(True, img)
+elif (skin==16):
+    turtle.shape("cat.gif")
+    img = tkinter.Image("photo", file = "cat.gif")
+    turtle._Screen._root.iconphoto(True, img)
 turtle.shapesize(50,50)
 turtle.penup()
 if(Trail==1):
@@ -665,6 +672,7 @@ while running == 1:
         turtle.setposition(0,0)
         turtle.speed(speed)
     def pause():
+        global n
         global paused
         global running
         pause = tkinter.Toplevel()
@@ -703,6 +711,7 @@ while running == 1:
         skin.add_radiobutton(label="Chip", command=lambda:turtle.shape("chip.gif"))
         skin.add_radiobutton(label="Potato", command=lambda:turtle.shape("potato.gif"))
         skin.add_radiobutton(label="Brick", command=lambda:turtle.shape("brick.gif"))
+        skin.add_radiobutton(label="Brick", command=lambda:turtle.shape("cat.gif"))
         menubar.add_cascade(label="Skin", menu=skin)
         music = Menu(menubar, tearoff=0)
         music.add_radiobutton(label="CTAC(Default)", command=lambda:winsound.PlaySound('main.wav', winsound.SND_ASYNC | winsound.SND_LOOP))
@@ -714,6 +723,7 @@ while running == 1:
         music.add_radiobutton(label="Brick", command=lambda:winsound.PlaySound('brick.wav', winsound.SND_ASYNC | winsound.SND_LOOP))
         menubar.add_cascade(label="Music", menu=music)
         def rpl():
+            global n
             turtle.speed(0)
             turtle.setpos(0, 0)
             n=0
