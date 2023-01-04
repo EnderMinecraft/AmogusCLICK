@@ -296,6 +296,7 @@ def box():
     rootbox = tkinter.Toplevel()
     rootbox.title("Enter Activate code")
     rootbox.geometry('400x150')
+    rootbox.resizable(False, False)
     signin = ttk.Frame(rootbox)
     signin.pack(padx=5, pady=5, fill='x', expand=False)
     password_label = ttk.Label(signin, text="Enable Code:")
