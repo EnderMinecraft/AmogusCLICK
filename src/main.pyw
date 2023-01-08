@@ -1,5 +1,5 @@
 #import
-import turtle, random, winsound, webbrowser, sys, base64, string
+import turtle, random, winsound, webbrowser, sys, base64, string, gc
 import tkinter as tk
 from tkinter import ttk
 from tkinter import *
@@ -472,6 +472,7 @@ menubar.add_cascade(label="HAX", menu=HAXmenu)
 root.config(menu=menubar)
 root.mainloop()
 #screen
+gc.collect()
 wn=turtle.Screen()
 canvas = wn.getcanvas()  # or, equivalently: turtle.getcanvas()
 rotwn = canvas.winfo_toplevel()
@@ -760,3 +761,4 @@ while running == 1:
         turtle.bye()
         break
         wn.bye()
+gc.collect()
