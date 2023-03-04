@@ -166,7 +166,7 @@ def myth():
 def about():
     tkinter.messagebox.showinfo("About","Made with fun by EnderMCDev")
 def helpme():
-    tkinter.messagebox.showinfo("Help","Choose Mode&Skin and press start.Your goal is reach as much point as possible by clicking the image")
+    tkinter.messagebox.showinfo("Help","Choose Difficulty & Skin and press start. Your goal is reach as much point as possible by clicking the image")
 def start():
     root.quit()
 url="https://youtu.be/dQw4w9WgXcQ"
@@ -218,7 +218,6 @@ def mad():
 def mbr():
     global music
     music=6
-
 #inzsetupbutton
 def btt():
     button = ttk.Button(root, text="Myth", command=myth)
