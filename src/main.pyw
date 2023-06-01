@@ -25,11 +25,11 @@ l = Label(root, text = "Gamemode is EASY", bg="indigo", fg='#FFFFFF')
 l.pack()
 #varset
 speed=2
-boost=0
+boostvar=tk.IntVar()
 skin=1
 music=0
-Auto=0
-Trail=0
+Autovar=tk.IntVar()
+Trailvar=tk.IntVar()
 #bgfunc
 def bgfg():
     global bg
@@ -158,6 +158,11 @@ def cat():
     skin=16
     bgfg()
     btt()
+def rndskn():
+    global skin
+    skin=random.randint(1,16)
+    bgfg()
+    btt()
 #miscFunc
 def hidden():
     tkinter.messagebox.showinfo("hi", "hi")
@@ -254,6 +259,7 @@ skinmenu.add_radiobutton(label="Chip", command=chip)
 skinmenu.add_radiobutton(label="Potato", command=potato)
 skinmenu.add_radiobutton(label="Brick", command=brick)
 skinmenu.add_radiobutton(label="Cat", command=cat)
+skinmenu.add_radiobutton(label="Random", command=rndskn)
 menubar.add_cascade(label="Skin", menu=skinmenu)
 
 musicmenu = Menu(menubar, tearoff=0)
@@ -307,18 +313,14 @@ def box():
     reqb = ttk.Button(signin, text="Request Code", command=lambda:tk.messagebox.showinfo("RequestCode", cod16))
     reqb.pack(fill='x', expand=True, pady=10)
 #devwindow
-ldb = Label()
-lds = Label()
-ldt = Label()
-lda = Label()
-lcr = Label()
+
+
 hax = 0
 def hece():
-    global ld
     global hax
     hax = tkinter.Toplevel(None)
     hax.title("Dev Menu")
-    hax.geometry('600x450')
+    hax.geometry('250x200')
     hax.resizable(False, False)
     Dev = Menu(hax)
     hax.config(menu=Dev)
@@ -327,141 +329,61 @@ def hece():
     hskin.add_radiobutton(label="Skin2", command=skinsc2)
     hskin.add_radiobutton(label="Skin3", command=skinsc3)
     Dev.add_cascade(label="Secret Skin", menu=hskin, underline=0)
-    ldb = Label(hax, text = "Boost:Off", bg="indigo", fg='#FFFFFF')
-    ldb.place(x=160, y=0)
-    lds = Label(hax, text = speed, bg="indigo", fg='#FFFFFF')
-    lds.place(x=160, y=30)
-    ldt = Label(hax, text = "Trail:Off", bg="indigo", fg='#FFFFFF')
-    ldt.place(x=160, y=60)
-    lda = Label(hax, text = "Auto:Off", bg="indigo", fg='#FFFFFF')
-    lda.place(x=160, y=90)
-    button = ttk.Button(hax, text="Boost", command=boost)
-    button.place(x=80, y=0)
-    button = ttk.Button(hax, text="Noboost", command=noboost)
-    button.place(x=0, y=0)
-    button = ttk.Button(hax, text="+1 Speed", command=pspeed)
-    button.place(x=0, y=30)
-    button = ttk.Button(hax, text="-1 Speed", command=nspeed)
-    button.place(x=80, y=30)
-    button = ttk.Button(hax, text="Trail", command=Trail)
-    button.place(x=0, y=60)
-    button = ttk.Button(hax, text="NoTrail", command=Notrail)
-    button.place(x=80, y=60)
-    button = ttk.Button(hax, text="Enable Auto", command=Auto)
-    button.place(x=0, y=90)
-    button = ttk.Button(hax, text="Disable Auto", command=Nauto)
-    button.place(x=80, y=90)
+    wspeed = ttk.Scale(hax, from_=0, to=10, orient=HORIZONTAL)
+    wspeed.place(x=0, y=75)
+    l = Label(hax, text = speed, fg='#FFFFFF')
+    l.place(x=50, y=60)
+    def apply():
+        global speed
+        speed = round(wspeed.get())
+        l = Label(hax, text = speed, fg='#FFFFFF')
+        l.place(x=50, y=60)
+    button = ttk.Button(hax, text="Apply speed", command=apply)
+    button.place(x=100, y=75)
+    boostchk = ttk.Checkbutton(hax, text='Boost',variable=boostvar, onvalue=1, offvalue=0)
+    boostchk.place(x=0, y=40)
+    boostchk = ttk.Checkbutton(hax, text='Trail',variable=Trailvar, onvalue=1, offvalue=0)
+    boostchk.place(x=0, y=20)
+    boostchk = ttk.Checkbutton(hax, text='Auto',variable=Autovar, onvalue=1, offvalue=0)
+    boostchk.place(x=0, y=0)
+    
+    
 #devfunc
 def boost():
-    global boost
+    global boostvar
     global ldb
-    if(boost==1):
+    if(boostvar.get()==1):
+        ldb = Label(hax, text = "Boost:On", bg="indigo", fg='#FFFFFF')
+        ldb.place(x=160, y=0)
+        print("on")
+    if(boostvar.get()==0):
         ldb.destroy()
         ldb = Label(hax, text = "Boost:On", bg="indigo", fg='#FFFFFF')
         ldb.place(x=160, y=0)
-    elif(boost==0):
-        boost=1
-        ldb.destroy()
-        ldb = Label(hax, text = "Boost:On", bg="indigo", fg='#FFFFFF')
-        ldb.place(x=160, y=0)
-    else:
-        boost=1
-def noboost():
-    global boost
-    global ldb
-    if(boost==0):
-        ldb.destroy()
-        ldb = Label(hax, text = "Boost:Off", bg="indigo", fg='#FFFFFF')
-        ldb.place(x=160, y=0)
-    elif(boost==1):
-        boost=0
-        ldb.destroy()
-        ldb = Label(hax, text = "Boost:Off", bg="indigo", fg='#FFFFFF')
-        ldb.place(x=160, y=0)
-    else:
-        boost=0
+        print("off")
 def Trail():
-    global Trail
+    global Trailvar
     global ldt
-    if(Trail==1):
+    if(Trail.get()==1):
         ldt.destroy()
         ldt = Label(hax, text = "Trail:On", bg="indigo", fg='#FFFFFF')
         ldt.place(x=160, y=60)
-    elif(Trail==0):
-        Trail=1
+    if(Trail.get()==0):
         ldt.destroy()
         ldt = Label(hax, text = "Trail:On", bg="indigo", fg='#FFFFFF')
         ldt.place(x=160, y=60)
-    else:
-        Trail=1
-def Notrail():
-    global Trail
-    global ldt
-    if(Trail==0):
-        ldt.destroy()
-        ldt = Label(hax, text = "Trail:Off", bg="indigo", fg='#FFFFFF')
-        ldt.place(x=160, y=60)
-    elif(Trail==1):
-        Trail=0
-        ldt.destroy()
-        ldt = Label(hax, text = "Trail:Off", bg="indigo", fg='#FFFFFF')
-        ldt.place(x=160, y=60)
-    else:
-        Trail=0
-def pspeed():
-    global speed
-    global lds
-    speed=speed+1
-    if(speed<10):
-        lds.destroy()
-        lds = Label(hax, text = speed, bg="indigo", fg='#FFFFFF')
-        lds.place(x=160, y=30)
-    elif (speed>=11):
-        lds.destroy()
-        lds = Label(hax, text = "Cant higher", bg="indigo", fg='#FFFFFF')
-        lds.place(x=160, y=30)
-        speed=0
-def nspeed():
-    global speed
-    global lds
-    speed=speed-1
-    if(speed>0):
-        lds.destroy()
-        lds = Label(hax, text = speed, bg="indigo", fg='#FFFFFF')
-        lds.place(x=160, y=30)
-    elif (speed<=0):
-        lds.destroy()
-        lds = Label(hax, text = "Cant lower", bg="indigo", fg='#FFFFFF')
-        lds.place(x=160, y=30)
-        speed=1
 def Auto():
-    global Auto
+    global Autovar
     global lda
-    if(Auto==1):
+    if(Auto.get()==1):
         lda.destroy()
         lda = Label(hax, text = "Auto:On", bg="indigo", fg='#FFFFFF')
         lda.place(x=160, y=90)
-    elif(Trail==0):
-        Auto=1
+    if(Auto.get()==0):
         lda.destroy()
         lda = Label(hax, text = "Auto:On", bg="indigo", fg='#FFFFFF')
         lda.place(x=160, y=90)
-    else:
-        Auto=1
-def Nauto():
-    global Auto
-    global lda
-    if(Auto==0):
-        lda.destroy()
-        lda = Label(hax, text = "Auto:Off", bg="indigo", fg='#FFFFFF')
-        lda.place(x=160, y=90)
-    elif(Auto==1):
-        Auto=0
-        lda.destroy()
-        lda = Label(hax, text = "Auto:Off", bg="indigo", fg='#FFFFFF')
-        lda.place(x=160, y=90)
-    else:
-        Auto=0
+
 
 #devmenu
 HAXmenu = Menu(menubar, tearoff=0)
@@ -471,6 +393,7 @@ menubar.add_cascade(label="HAX", menu=HAXmenu)
 root.config(menu=menubar)
 root.mainloop()
 #screen
+print(speed)
 gc.collect()
 wn=turtle.Screen()
 canvas = wn.getcanvas()  # or, equivalently: turtle.getcanvas()
@@ -516,7 +439,7 @@ elif(music==6):
 if (skin==127):
     n=500000
     o=127
-elif (boost==1):
+elif (boostvar.get()==1):
     n=200
     o=999
 else:
@@ -590,10 +513,10 @@ elif (skin==16):
     turtle._Screen._root.iconphoto(True, img)
 turtle.shapesize(50,50)
 turtle.penup()
-if(Trail==1):
+if(Trailvar.get()==1):
     turtle.color('red')
     turtle.pendown()
-elif(Trail==0):
+elif(Trailvar.get()==0):
     turtle.penup()
 turtle.speed(speed)
 
@@ -614,7 +537,7 @@ while running == 1:
             turtle.setposition(a, b)
             if(skin==127):
                 n=n*7
-            elif (boost==1):
+            elif (boostvar.get()==1):
                 n=n*o
             else:
                 n=n+o
@@ -659,7 +582,7 @@ while running == 1:
         turtle.bye()
         break
         wn.bye()
-    if (Auto==1):
+    if (Autovar.get()==1):
         turtle.onclick(fxn(xin,yin))
     else:
         turtle.onclick(fxn)
@@ -712,7 +635,7 @@ while running == 1:
         skin.add_radiobutton(label="Chip", command=lambda:turtle.shape("chip.gif"))
         skin.add_radiobutton(label="Potato", command=lambda:turtle.shape("potato.gif"))
         skin.add_radiobutton(label="Brick", command=lambda:turtle.shape("brick.gif"))
-        skin.add_radiobutton(label="Brick", command=lambda:turtle.shape("cat.gif"))
+        skin.add_radiobutton(label="Cat", command=lambda:turtle.shape("cat.gif"))
         menubar.add_cascade(label="Skin", menu=skin)
         music = Menu(menubar, tearoff=0)
         music.add_radiobutton(label="CTAC(Default)", command=lambda:winsound.PlaySound('main.wav', winsound.SND_ASYNC | winsound.SND_LOOP))
