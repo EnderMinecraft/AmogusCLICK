@@ -1,9 +1,18 @@
 #import
-import turtle, random, winsound, webbrowser, sys, base64, string, gc
+import turtle, random, winsound, webbrowser, sys, base64, string, gc, ctypes
 import tkinter as tk
 from tkinter import ttk
 from tkinter import *
 import tkinter.messagebox
+console_toggle = 0
+def apply2():
+        global console_toggle
+        if console_toggle==1:
+            ctypes.windll.user32.ShowWindow(ctypes.windll.kernel32.GetConsoleWindow(), 4)
+        else:
+            ctypes.windll.user32.ShowWindow(ctypes.windll.kernel32.GetConsoleWindow(), 0)
+        console_toggle = not console_toggle
+apply2()
 #tk
 root = tkinter.Tk()
 root.geometry('400x450')
@@ -12,8 +21,9 @@ root.resizable(False, False)
 root.iconbitmap('icon.ico')
 exitvar=0
 def on_exit():
+    console_toggle = 0
+    apply2()
     root.destroy()
-    sys.exit()
 root.protocol("WM_DELETE_WINDOW", on_exit)
 #bglabelset
 bg = PhotoImage(file = "skin1.gif")
@@ -177,7 +187,6 @@ def start():
 url="https://youtu.be/dQw4w9WgXcQ"
 def rig():
     webbrowser.open_new(url)
-
 #difffunc
 def ez():
         global speed
@@ -282,7 +291,6 @@ menubar.add_cascade(label="Help", menu=helpmenu)
 #p2wset
 txt = string.ascii_letters + string.digits
 cod = ''.join(random.choice(txt) for i in range(16))
-print(cod)
 cod16 = base64.b16encode(cod.encode('utf-8'))
 cod16 = cod16.decode("utf-8")
 password_entry = Entry()
@@ -313,13 +321,13 @@ def box():
     reqb = ttk.Button(signin, text="Request Code", command=lambda:tk.messagebox.showinfo("RequestCode", cod16))
     reqb.pack(fill='x', expand=True, pady=10)
 #devwindow
-
-
 hax = 0
 def hece():
     global hax
+    global music
+    global speed
     hax = tkinter.Toplevel(None)
-    hax.title("Dev Menu")
+    hax.title("Settings")
     hax.geometry('250x200')
     hax.resizable(False, False)
     Dev = Menu(hax)
@@ -330,73 +338,52 @@ def hece():
     hskin.add_radiobutton(label="Skin3", command=skinsc3)
     Dev.add_cascade(label="Secret Skin", menu=hskin, underline=0)
     wspeed = ttk.Scale(hax, from_=0, to=10, orient=HORIZONTAL)
-    wspeed.place(x=0, y=75)
-    l = Label(hax, text = speed, fg='#FFFFFF')
-    l.place(x=50, y=60)
+    wspeed.place(x=0, y=85)
+    l = Label(hax, text = speed)
+    l.place(x=200, y=85)
+    def apply2():
+        global console_toggle
+        if console_toggle==1:
+            ctypes.windll.user32.ShowWindow(ctypes.windll.kernel32.GetConsoleWindow(), 4)
+        else:
+            ctypes.windll.user32.ShowWindow(ctypes.windll.kernel32.GetConsoleWindow(), 0)
+        console_toggle = not console_toggle
     def apply():
         global speed
         speed = round(wspeed.get())
-        l = Label(hax, text = speed, fg='#FFFFFF')
-        l.place(x=50, y=60)
+        l = Label(hax, text = speed)
+        l.place(x=50, y=54)
     button = ttk.Button(hax, text="Apply speed", command=apply)
-    button.place(x=100, y=75)
+    button.place(x=110, y=85)
+    button = ttk.Button(hax, text="Show console", command=apply2)
+    button.place(x=100, y=0)
     boostchk = ttk.Checkbutton(hax, text='Boost',variable=boostvar, onvalue=1, offvalue=0)
     boostchk.place(x=0, y=40)
     boostchk = ttk.Checkbutton(hax, text='Trail',variable=Trailvar, onvalue=1, offvalue=0)
     boostchk.place(x=0, y=20)
     boostchk = ttk.Checkbutton(hax, text='Auto',variable=Autovar, onvalue=1, offvalue=0)
     boostchk.place(x=0, y=0)
+    cmd_entry=ttk.Entry(hax,width=40)
+    cmd_entry.place(x=0, y=133)
+    #if there are more custom var,put it inside string below
+    l = Label(hax, text = "Enter debug command below!")
+    l.place(x=0, y=111)
+    button3 = ttk.Button(hax, text="Run command!", command=lambda: exec("global exitvar, bg, label1, label2, speed, boostvar, skin, music, Autovar, Trailvarr, url, txt, cod, cod16\n"+cmd_entry.get()))
+    button3.place(x=80, y=170)
     
-    
-#devfunc
-def boost():
-    global boostvar
-    global ldb
-    if(boostvar.get()==1):
-        ldb = Label(hax, text = "Boost:On", bg="indigo", fg='#FFFFFF')
-        ldb.place(x=160, y=0)
-        print("on")
-    if(boostvar.get()==0):
-        ldb.destroy()
-        ldb = Label(hax, text = "Boost:On", bg="indigo", fg='#FFFFFF')
-        ldb.place(x=160, y=0)
-        print("off")
-def Trail():
-    global Trailvar
-    global ldt
-    if(Trail.get()==1):
-        ldt.destroy()
-        ldt = Label(hax, text = "Trail:On", bg="indigo", fg='#FFFFFF')
-        ldt.place(x=160, y=60)
-    if(Trail.get()==0):
-        ldt.destroy()
-        ldt = Label(hax, text = "Trail:On", bg="indigo", fg='#FFFFFF')
-        ldt.place(x=160, y=60)
-def Auto():
-    global Autovar
-    global lda
-    if(Auto.get()==1):
-        lda.destroy()
-        lda = Label(hax, text = "Auto:On", bg="indigo", fg='#FFFFFF')
-        lda.place(x=160, y=90)
-    if(Auto.get()==0):
-        lda.destroy()
-        lda = Label(hax, text = "Auto:On", bg="indigo", fg='#FFFFFF')
-        lda.place(x=160, y=90)
-
-
 #devmenu
 HAXmenu = Menu(menubar, tearoff=0)
-HAXmenu.add_command(label="HAX", command=box)
-HAXmenu.add_command(label="MENU", command=lambda: hece())
-menubar.add_cascade(label="HAX", menu=HAXmenu)
+HAXmenu.add_command(label="somesecretskin:", command=box)
+HAXmenu.add_command(label="Settings", command=lambda: hece())
+menubar.add_cascade(label="Extra", menu=HAXmenu)
 root.config(menu=menubar)
 root.mainloop()
 #screen
-print(speed)
+console_toggle = 0
+apply2()
 gc.collect()
 wn=turtle.Screen()
-canvas = wn.getcanvas()  # or, equivalently: turtle.getcanvas()
+canvas = wn.getcanvas()
 rotwn = canvas.winfo_toplevel()
 def on_close():
     global running
