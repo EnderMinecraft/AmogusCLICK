@@ -1,7 +1,7 @@
 cd src
 rd /s /q dist
 del /q main.spec
-pyinstaller -w --onefile -i ".\icon.ico" .\main.pyw
+pyinstaller --onefile -i ".\icon.ico" .\main.py
 md ..\output
 move /y .\dist\main.exe ..\output\
 ren main.exe AmogusClck.exe
