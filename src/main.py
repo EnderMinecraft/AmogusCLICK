@@ -1,29 +1,21 @@
 #import
-import turtle, random, winsound, webbrowser, sys, base64, string, gc, ctypes
+import turtle, random, winsound, webbrowser, sys, base64, string, gc, json, ctypes
 import tkinter as tk
 from tkinter import ttk
 from tkinter import *
 import tkinter.messagebox
 console_toggle = 0
-def apply2():
-        global console_toggle
-        if console_toggle==1:
-            ctypes.windll.user32.ShowWindow(ctypes.windll.kernel32.GetConsoleWindow(), 4)
-        else:
-            ctypes.windll.user32.ShowWindow(ctypes.windll.kernel32.GetConsoleWindow(), 0)
-        console_toggle = not console_toggle
-apply2()
+ctypes.windll.user32.ShowWindow(ctypes.windll.kernel32.GetConsoleWindow(), 0)
 #tk
 root = tkinter.Tk()
 root.geometry('400x450')
 root.title("Main menu")
 root.resizable(False, False)
 root.iconbitmap('icon.ico')
-exitvar=0
 def on_exit():
-    console_toggle = 0
-    apply2()
+    ctypes.windll.user32.ShowWindow(ctypes.windll.kernel32.GetConsoleWindow(), 4)
     root.destroy()
+    sys.exit()
 root.protocol("WM_DELETE_WINDOW", on_exit)
 #bglabelset
 bg = PhotoImage(file = "skin1.gif")
@@ -174,6 +166,7 @@ def rndskn():
     bgfg()
     btt()
 #miscFunc
+
 def hidden():
     tkinter.messagebox.showinfo("hi", "hi")
 def myth():
@@ -321,11 +314,14 @@ def box():
     reqb = ttk.Button(signin, text="Request Code", command=lambda:tk.messagebox.showinfo("RequestCode", cod16))
     reqb.pack(fill='x', expand=True, pady=10)
 #devwindow
+last_key = None
+act="hax.bind('<KeyPress>', keypress_handler)"
 hax = 0
 def hece():
     global hax
     global music
     global speed
+    global act
     hax = tkinter.Toplevel(None)
     hax.title("Settings")
     hax.geometry('250x200')
@@ -368,9 +364,19 @@ def hece():
     #if there are more custom var,put it inside string below
     l = Label(hax, text = "Enter debug command below!")
     l.place(x=0, y=111)
-    button3 = ttk.Button(hax, text="Run command!", command=lambda: exec("global exitvar, bg, label1, label2, speed, boostvar, skin, music, Autovar, Trailvarr, url, txt, cod, cod16\n"+cmd_entry.get()))
+    button3 = ttk.Button(hax, text="Run command!", command=lambda: exec("global bg, label1, label2, speed, boostvar, skin, music, Autovar, Trailvar, url, txt, cod, cod16, console_toggle, root\n"+cmd_entry.get()))
     button3.place(x=80, y=170)
-    
+    def keypress_handler(event):
+        global last_key
+        global act
+        key_pressed = event.keysym
+        if key_pressed == 'space':
+            if last_key == 'Shift_L':
+                global act
+                hidden()
+                act=1
+        last_key = key_pressed
+    exec(act)
 #devmenu
 HAXmenu = Menu(menubar, tearoff=0)
 HAXmenu.add_command(label="somesecretskin:", command=box)
@@ -379,8 +385,7 @@ menubar.add_cascade(label="Extra", menu=HAXmenu)
 root.config(menu=menubar)
 root.mainloop()
 #screen
-console_toggle = 0
-apply2()
+ctypes.windll.user32.ShowWindow(ctypes.windll.kernel32.GetConsoleWindow(), 0)
 gc.collect()
 wn=turtle.Screen()
 canvas = wn.getcanvas()
