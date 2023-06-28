@@ -1,11 +1,24 @@
 #import
-import turtle, random, winsound, webbrowser, sys, base64, string, gc, json, ctypes
+import turtle, random, winsound, webbrowser, sys, base64, string, gc, json, ctypes, os
 import tkinter as tk
 from tkinter import ttk
 from tkinter import *
 import tkinter.messagebox
 console_toggle = 0
 ctypes.windll.user32.ShowWindow(ctypes.windll.kernel32.GetConsoleWindow(), 0)
+if getattr(sys, 'frozen', False):
+    application_path = os.path.dirname(sys.executable)
+elif __file__:
+    application_path = os.path.dirname(__file__)
+if os.path.isfile(os.path.join(application_path, "savefile.json")):
+    pass
+elif not os.path.isfile(os.path.join(application_path, "savefile.json")):
+    with open("savefile.json", 'w+') as file:
+        file.write('{"highscore":0}')
+        file.close()
+else:
+    pass
+loaded=0
 #tk
 root = tkinter.Tk()
 root.geometry('400x450')
@@ -166,7 +179,6 @@ def rndskn():
     bgfg()
     btt()
 #miscFunc
-
 def hidden():
     tkinter.messagebox.showinfo("hi", "hi")
 def myth():
@@ -180,6 +192,32 @@ def start():
 url="https://youtu.be/dQw4w9WgXcQ"
 def rig():
     webbrowser.open_new(url)
+def read():
+    global data
+    with open("savefile.json", "r") as infile:
+        global data
+        try:
+            global data
+            data = json.load(infile)
+        except:
+            tkinter.messagebox.showinfo("Savefile error", "Invalid savefile detected")
+            with open("savefile.json", 'w+') as file:
+                file.write('{"highscore":0}')
+                file.close()
+    infile.close()
+def resetsavefile():
+    resetsvf = {
+                "highscore": 0,
+            }
+    with open("savefile.json", "w") as outfile:
+                json.dump(resetsvf, outfile)
+    read()
+read()
+def load():
+    read()
+    global loaded
+    global data
+    loaded = 1
 #difffunc
 def ez():
         global speed
@@ -274,6 +312,11 @@ musicmenu.add_radiobutton(label="Chad", command=mad)
 musicmenu.add_radiobutton(label="Brick", command=mbr)
 menubar.add_cascade(label="Music", menu=musicmenu)
 
+savemenu = Menu(menubar, tearoff=0)
+savemenu.add_command(label="Load", command=load)
+savemenu.add_command(label="Reset", command=resetsavefile)
+menubar.add_cascade(label="Savefile", menu=savemenu)
+
 helpmenu = Menu(menubar, tearoff=0)
 helpmenu.add_command(label="Help", command=helpme)
 helpmenu.add_command(label="DO NOT CLICK", command=rig)
@@ -364,7 +407,7 @@ def hece():
     #if there are more custom var,put it inside string below
     l = Label(hax, text = "Enter debug command below!")
     l.place(x=0, y=111)
-    button3 = ttk.Button(hax, text="Run command!", command=lambda: exec("global bg, label1, label2, speed, boostvar, skin, music, Autovar, Trailvar, url, txt, cod, cod16, console_toggle, root\n"+cmd_entry.get()))
+    button3 = ttk.Button(hax, text="Run command!", command=lambda: exec("global bg, label1, label2, speed, boostvar, skin, music, Autovar, Trailvar, url, loaded, txt, cod, cod16, console_toggle, root, data\n"+cmd_entry.get()))
     button3.place(x=80, y=170)
     def keypress_handler(event):
         global last_key
@@ -379,13 +422,13 @@ def hece():
     exec(act)
 #devmenu
 HAXmenu = Menu(menubar, tearoff=0)
-HAXmenu.add_command(label="somesecretskin:", command=box)
+HAXmenu.add_command(label="somesecretskin:)", command=box)
 HAXmenu.add_command(label="Settings", command=lambda: hece())
 menubar.add_cascade(label="Extra", menu=HAXmenu)
 root.config(menu=menubar)
 root.mainloop()
 #screen
-ctypes.windll.user32.ShowWindow(ctypes.windll.kernel32.GetConsoleWindow(), 0)
+ctypes.windll.user32.ShowWindow(ctypes.windll.kernel32.GetConsoleWindow(), 4)
 gc.collect()
 wn=turtle.Screen()
 canvas = wn.getcanvas()
@@ -437,6 +480,10 @@ elif (boostvar.get()==1):
 else:
     n=0
     o=1
+if (loaded==1):
+    n=n+int(data["highscore"])
+else:
+    pass
 wn.title(n)
 #asset
 if (skin==1):
@@ -587,6 +634,12 @@ while running == 1:
         turtle.speed(0)
         turtle.setposition(0,0)
         turtle.speed(speed)
+    def save():
+            savefile = {
+                "highscore": n,
+            }
+            with open("savefile.json", "w") as outfile:
+                json.dump(savefile, outfile)
     def pause():
         global n
         global paused
@@ -655,10 +708,13 @@ while running == 1:
         button = ttk.Button(pause, text="Restart", command=rpl, style="rs.TButton")
         button.place(x=110, y=50)
         button = ttk.Button(pause, text="Exit", command=end, style="end.TButton")
+        button.place(x=110, y=150)
+        button = ttk.Button(pause, text="Save", command=save, style="save.TButton")
         button.place(x=110, y=100)
-        style.configure('cn.TButton', font=(None, 20), foreground="blue4")
-        style.configure('rs.TButton', font=(None, 20), foreground="green4")
-        style.configure('end.TButton', font=(None, 20), foreground="red4")
+        style.configure('cn.TButton', font=(None, 20), foreground="skyblue")
+        style.configure('rs.TButton', font=(None, 20), foreground="mediumaquamarine")
+        style.configure('end.TButton', font=(None, 20), foreground="orangered")
+        style.configure('save.TButton', font=(None, 20), foreground="orange")
     if (running==0):
         winsound.PlaySound(None, winsound.SND_FILENAME)
         turtle.bye()
