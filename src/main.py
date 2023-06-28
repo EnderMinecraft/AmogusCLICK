@@ -428,7 +428,7 @@ menubar.add_cascade(label="Extra", menu=HAXmenu)
 root.config(menu=menubar)
 root.mainloop()
 #screen
-ctypes.windll.user32.ShowWindow(ctypes.windll.kernel32.GetConsoleWindow(), 4)
+ctypes.windll.user32.ShowWindow(ctypes.windll.kernel32.GetConsoleWindow(), 0)
 gc.collect()
 wn=turtle.Screen()
 canvas = wn.getcanvas()
