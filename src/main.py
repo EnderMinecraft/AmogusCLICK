@@ -4,7 +4,6 @@ import tkinter as tk
 from tkinter import ttk
 from tkinter import *
 import tkinter.messagebox
-console_toggle = 0
 ctypes.windll.user32.ShowWindow(ctypes.windll.kernel32.GetConsoleWindow(), 0)
 if getattr(sys, 'frozen', False):
     application_path = os.path.dirname(sys.executable)
@@ -16,9 +15,21 @@ elif not os.path.isfile(os.path.join(application_path, "savefile.json")):
     with open("savefile.json", 'w+') as file:
         file.write('{"highscore":0}')
         file.close()
+if os.path.isfile(os.path.join(application_path, "settings.json")):
+    pass
+elif not os.path.isfile(os.path.join(application_path, "settings.json")):
+    with open("settings.json", 'w+') as file:
+        file.write('lastskin":0, "lastmusic":0, "lastauto":0, "lastboost":0, "lasttrail":0, "lastcons":0, "lastdiff":0}')
+        file.close()
 else:
     pass
-loaded=0
+def apply2():
+    global console_toggle
+    if console_toggle==1:
+        ctypes.windll.user32.ShowWindow(ctypes.windll.kernel32.GetConsoleWindow(), 4)
+    else:
+        ctypes.windll.user32.ShowWindow(ctypes.windll.kernel32.GetConsoleWindow(), 0)
+    console_toggle = not console_toggle
 #tk
 root = tkinter.Tk()
 root.geometry('400x450')
@@ -39,12 +50,21 @@ label2.place(x = 0,y = 240)
 l = Label(root, text = "Gamemode is EASY", bg="indigo", fg='#FFFFFF')
 l.pack()
 #varset
+n=0
+o=1
+trailed=0
 speed=2
 boostvar=tk.IntVar()
+rgbvar=tk.IntVar()
 skin=1
 music=0
 Autovar=tk.IntVar()
 Trailvar=tk.IntVar()
+loaded=0
+console_toggle = 0
+data=0
+settings=0
+url="https://youtu.be/dQw4w9WgXcQ"
 #bgfunc
 def bgfg():
     global bg
@@ -91,6 +111,60 @@ def bgfg():
     label2= Label(root, image = bg)
     label2.place(x = 0,y = 240)
     btt()
+#loadsettings
+def loadsettings():
+    global settings
+    with open("settings.json", "r") as settingsfile:
+        global settings
+        try:
+            global settings, music, skin, Autovar, boostvar, Trailvar, console_toggle, speed, rgbvar
+            settings = json.load(settingsfile)
+            music=settings["lastmusic"]
+            skin=settings["lastskin"]
+            Autovar=settings["lastauto"]
+            boostvar=settings["lastboost"]
+            Trailvar=settings["lasttrail"]
+            console_toggle=settings["lastcons"]
+            speed=settings["lastspeed"]
+            rgbvar=settings["lastrgb"]
+            apply2()
+            
+        except:
+            tkinter.messagebox.showinfo("Config file error", "Invalid config file detected! Attempted to reset")
+            with open("settings.json", 'w+') as rsettingfile:
+                rsettingfile.write('{"lastskin":1, "lastmusic":0, "lastauto":0, "lastboost":0, "lasttrail":0, "lastcons":0, "lastspeed":5, "lastrgb":0}')
+                rsettingfile.close()
+def savesettings():
+    global music, skin, Autovar, boostvar, Trailvar, console_toggle, speed, rgbvar
+    print(type(Autovar))
+    if str(type(Autovar)) == "<class 'tkinter.IntVar'>":
+        settingssave = {
+                    "lastskin": skin,
+                    "lastmusic": music,
+                    "lastauto": Autovar.get(),
+                    "lastboost": boostvar.get(),
+                    "lasttrail": Trailvar.get(),
+                    "lastcons": console_toggle,
+                    "lastspeed": speed,
+                    "lastrgb": rgbvar.get(),
+            }
+    else:
+        settingssave = {
+                    "lastskin": skin,
+                    "lastmusic": music,
+                    "lastauto": Autovar,
+                    "lastboost": boostvar,
+                    "lasttrail": Trailvar,
+                    "lastcons": console_toggle,
+                    "lastspeed": speed,
+                    "lastrgb": rgbvar,
+            }
+    with open("settings.json", 'w') as wsettingfile:
+        json.dump(settingssave, wsettingfile)
+def resetsettings():
+    with open("settings.json", 'w+') as wsettingfile:
+        wsettingfile.write('{"lastskin":1, "lastmusic":0, "lastauto":0, "lastboost":0, "lasttrail":0, "lastcons":0, "lastspeed":5, "lastrgb":0}')
+        wsettingfile.close()
 #skinfunc
 def skin1():
     global skin
@@ -189,7 +263,6 @@ def helpme():
     tkinter.messagebox.showinfo("Help","Choose Difficulty & Skin and press start. Your goal is reach as much point as possible by clicking the image")
 def start():
     root.quit()
-url="https://youtu.be/dQw4w9WgXcQ"
 def rig():
     webbrowser.open_new(url)
 def read():
@@ -313,8 +386,11 @@ musicmenu.add_radiobutton(label="Brick", command=mbr)
 menubar.add_cascade(label="Music", menu=musicmenu)
 
 savemenu = Menu(menubar, tearoff=0)
-savemenu.add_command(label="Load", command=load)
-savemenu.add_command(label="Reset", command=resetsavefile)
+savemenu.add_command(label="Load Progress", command=load)
+savemenu.add_command(label="Reset Progress", command=resetsavefile)
+savemenu.add_command(label="Load Settings", command=loadsettings)
+savemenu.add_command(label="Save Settings", command=savesettings)
+savemenu.add_command(label="Reset Settings", command=resetsettings)
 menubar.add_cascade(label="Savefile", menu=savemenu)
 
 helpmenu = Menu(menubar, tearoff=0)
@@ -380,18 +456,11 @@ def hece():
     wspeed.place(x=0, y=85)
     l = Label(hax, text = speed)
     l.place(x=200, y=85)
-    def apply2():
-        global console_toggle
-        if console_toggle==1:
-            ctypes.windll.user32.ShowWindow(ctypes.windll.kernel32.GetConsoleWindow(), 4)
-        else:
-            ctypes.windll.user32.ShowWindow(ctypes.windll.kernel32.GetConsoleWindow(), 0)
-        console_toggle = not console_toggle
     def apply():
         global speed
         speed = round(wspeed.get())
         l = Label(hax, text = speed)
-        l.place(x=50, y=54)
+        l.place(x=200, y=85)
     button = ttk.Button(hax, text="Apply speed", command=apply)
     button.place(x=110, y=85)
     button = ttk.Button(hax, text="Show console", command=apply2)
@@ -402,12 +471,14 @@ def hece():
     boostchk.place(x=0, y=20)
     boostchk = ttk.Checkbutton(hax, text='Auto',variable=Autovar, onvalue=1, offvalue=0)
     boostchk.place(x=0, y=0)
+    boostchk = ttk.Checkbutton(hax, text='RGB',variable=rgbvar, onvalue=1, offvalue=0)
+    boostchk.place(x=0, y=60)
     cmd_entry=ttk.Entry(hax,width=40)
     cmd_entry.place(x=0, y=133)
     #if there are more custom var,put it inside string below
     l = Label(hax, text = "Enter debug command below!")
     l.place(x=0, y=111)
-    button3 = ttk.Button(hax, text="Run command!", command=lambda: exec("global bg, label1, label2, speed, boostvar, skin, music, Autovar, Trailvar, url, loaded, txt, cod, cod16, console_toggle, root, data\n"+cmd_entry.get()))
+    button3 = ttk.Button(hax, text="Run command!", command=lambda: exec("global bg, label1, label2, speed, boostvar, skin, music, Autovar, Trailvar, url, loaded, txt, cod, cod16, console_toggle, root, data, rgbvar\n"+cmd_entry.get()))
     button3.place(x=80, y=170)
     def keypress_handler(event):
         global last_key
@@ -431,6 +502,7 @@ root.mainloop()
 ctypes.windll.user32.ShowWindow(ctypes.windll.kernel32.GetConsoleWindow(), 0)
 gc.collect()
 wn=turtle.Screen()
+wn.colormode(255)
 canvas = wn.getcanvas()
 rotwn = canvas.winfo_toplevel()
 def on_close():
@@ -474,9 +546,20 @@ elif(music==6):
 if (skin==127):
     n=500000
     o=127
-elif (boostvar.get()==1):
-    n=200
-    o=999
+elif str(type(boostvar)) == "<class 'tkinter.IntVar'>":
+    if (boostvar.get()==1):
+        n=200
+        o=999
+    else:
+        n=0
+        o=1
+elif str(type(boostvar)) == "<class 'int'>":
+    if (boostvar==1):
+        n=200
+        o=999
+    else:
+        n=0
+        o=1
 else:
     n=0
     o=1
@@ -552,11 +635,20 @@ elif (skin==16):
     turtle._Screen._root.iconphoto(True, img)
 turtle.shapesize(50,50)
 turtle.penup()
-if(Trailvar.get()==1):
-    turtle.color('red')
-    turtle.pendown()
-elif(Trailvar.get()==0):
-    turtle.penup()
+if str(type(Trailvar)) == "<class 'tkinter.IntVar'>":
+    if(Trailvar.get()==1):
+        trailed=1
+        turtle.color('red')
+        turtle.pendown()
+    elif(Trailvar.get()==0):
+        turtle.penup()
+else:
+    if(Trailvar==1):
+        trailed=1
+        turtle.color('red')
+        turtle.pendown()
+    elif(Trailvar==0):
+        turtle.penup()
 turtle.speed(speed)
 
 #boundnclk
@@ -571,15 +663,25 @@ while running == 1:
     def fxn(a, b):
         if (paused == 0):
             global n
+            global o
             a=random.randint(-600,600)
             b=random.randint(-400,400)
             turtle.setposition(a, b)
             if(skin==127):
                 n=n*7
-            elif (boostvar.get()==1):
-                n=n*o
+            elif str(type(boostvar)) == "<class 'tkinter.IntVar'>":
+                if (boostvar.get()==1):
+                    n=n*o
+                else:
+                    turtle.title(n)
+            elif str(type(boostvar)) == "<class 'int'>":
+                if (boostvar==1):
+                    n=n*o
+                else:
+                    turtle.title(n)
             else:
                 n=n+o
+            n=n+o
             turtle.title(n)
         else:
             pass
@@ -621,10 +723,27 @@ while running == 1:
         turtle.bye()
         break
         wn.bye()
-    if (Autovar.get()==1):
-        turtle.onclick(fxn(xin,yin))
+    if str(type(Autovar)) == "<class 'tkinter.IntVar'>":
+        if (Autovar.get()==1):
+            turtle.onclick(fxn(xin,yin))
+        else:
+            turtle.onclick(fxn)
     else:
-        turtle.onclick(fxn)
+        if (Autovar==1):
+            turtle.onclick(fxn(xin,yin))
+        else:
+            turtle.onclick(fxn)
+    if (str(type(rgbvar)) == "<class 'tkinter.IntVar'>" and trailed == 1):
+        if (rgbvar.get()==1):
+            turtle.color(random.randint(0,255), random.randint(0,255), random.randint(0,255))
+        else:
+            turtle.onclick(fxn)
+    elif (str(type(rgbvar)) == "<class 'int'>" and trailed == 1):
+        if (rgbvar==1):
+            turtle.color(random.randint(0,255), random.randint(0,255), random.randint(0,255))
+        else:
+            turtle.onclick(fxn)
+    turtle.onclick(fxn)
     if (running==0):
         winsound.PlaySound(None, winsound.SND_FILENAME)
         turtle.bye()
