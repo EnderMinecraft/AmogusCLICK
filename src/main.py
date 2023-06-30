@@ -358,7 +358,7 @@ def mbr():
 #inzsetupbutton
 def btt():
     button = ttk.Button(root, text="Myth", command=myth)
-    button.place(x=320, y=400)
+    button.place(x=310, y=400)
     button = ttk.Button(root, text="Easy", command=ez)
     button.place(x=70, y=60)
     button = ttk.Button(root, text="Normal", command=norm)
@@ -453,7 +453,7 @@ def callback1(box, arg):
     arg = arg.get()
     if len(arg) != 7:
         le = Label(hax, text = "Input must contain 7 characters\n(e.g. #42e0f5)", fg="#ff1605", bd=1)
-        le.place(x=90, y=20)
+        le.place(x=90, y=50)
         le.after(1000, le.destroy)
         box.delete(0, tk.END)
     else:
@@ -465,7 +465,7 @@ def callback2(box, arg):
     arg = arg.get()
     if len(arg) != 7:
         le = Label(hax, text = "Input must contain 7 characters\n(e.g. #42e0f5)", fg="#ff1605", bd=1)
-        le.place(x=90, y=20)
+        le.place(x=90, y=50)
         le.after(1000, le.destroy)
         box.delete(0, END)
     else:
@@ -475,7 +475,19 @@ def h2rgb(value):
     value = value.lstrip('#')
     lv = len(value)
     return tuple(int(value[i:i + lv // 3], 16) for i in range(0, lv, lv // 3))
-
+def randomcl1(r, g ,b):
+    global colr
+    colr = (r, g ,b)
+    hexcl1 = '#{:02x}{:02x}{:02x}'.format(r, g, b)
+    l1 = Label(hax, text = "     ", bd = 0, bg = hexcl1)
+    l1.place(x=282, y=3)
+    
+def randomcl2(r, g ,b):
+    global clbg
+    clbg = (r, g, b)
+    hexcl2 = '#{:02x}{:02x}{:02x}'.format(r, g, b)
+    l1 = Label(hax, text = "     ", bd = 0, bg = hexcl2)
+    l1.place(x=282, y=33)
 
 def hece():
     global hax
@@ -484,7 +496,7 @@ def hece():
     global act
     hax = tkinter.Toplevel(None)
     hax.title("Settings")
-    hax.geometry('290x200')
+    hax.geometry('310x200')
     hax.resizable(False, False)
     Dev = Menu(hax)
     hax.config(menu=Dev)
@@ -501,28 +513,31 @@ def hece():
         l = Label(hax, text = speed)
         l.place(x=140, y=86)
     l = Label(hax, text = "Customize trail color:", bd=0)
-    l.place(x=90, y=0)
-    btn = tk.Button(hax, text='✅', command=lambda: callback1(color_entry, cl), borderwidth=0, fg="#05ff09")
+    l.place(x=70, y=0)
+    btn = tk.Button(hax, text=u'\u2705', command=lambda: callback1(color_entry, cl), borderwidth=0, fg="#05ff09", font=("Segoe UI Emoji", 10))
+    btn.place(x=240, y=-1)
+    btn = tk.Button(hax, text='\U0001F504', command=lambda: randomcl1(random.randint(0,255), random.randint(0,255), random.randint(0,255)), borderwidth=0, font=("Segoe UI Emoji", 10), fg="#0078D7")
     btn.place(x=260, y=-1)
     color_entry=ttk.Entry(hax, textvariable=cl, width=6)
-    color_entry.place(x=210, y=0)
+    color_entry.place(x=190, y=0)
 
     l2 = Label(hax, text = "Customize BG color:", bd=0)
-    l2.place(x=90, y=30)
-    btn2 = tk.Button(hax, text='✅', command=lambda: callback2(bg_entry, cl2), borderwidth=0, fg="#05ff09")
-    btn2.place(x=260, y=30)
+    l2.place(x=70, y=30)
+    btn2 = tk.Button(hax, text='✅', command=lambda: callback2(bg_entry, cl2), borderwidth=0, fg="#05ff09", font=("Segoe UI Emoji", 10))
+    btn2.place(x=240, y=30)
+    btn = tk.Button(hax, text='\U0001F504', command=lambda: randomcl2(random.randint(0,255), random.randint(0,255), random.randint(0,255)), borderwidth=0, font=("Segoe UI Emoji", 10), fg="#0078D7")
+    btn.place(x=260, y=30)
     bg_entry=ttk.Entry(hax, textvariable=cl2, width=6)
-    bg_entry.place(x=210, y=30)
-
+    bg_entry.place(x=190, y=30)
     
     separator = ttk.Separator(hax, orient='vertical')
-    separator.place(relx=0.3, rely=0, relheight=0.4)
+    separator.place(relx=0.2, rely=0, relheight=0.4)
     button = tk.Button(hax, text="✅", command=apply, borderwidth=0, fg="#05ff09")
     button.place(x=110, y=85)
     button = ttk.Button(hax, text="Show console", command=apply2)
-    button.place(x=200, y=170)
+    button.place(x=220, y=170)
     button = ttk.Button(hax, text="Clear command", command=lambda: cmd_entry.delete(0, END))
-    button.place(x=100, y=170)
+    button.place(x=113, y=170)
     boostchk = ttk.Checkbutton(hax, text='Boost',variable=boostvar, onvalue=1, offvalue=0)
     boostchk.place(x=0, y=40)
     boostchk = ttk.Checkbutton(hax, text='Trail',variable=Trailvar, onvalue=1, offvalue=0)
