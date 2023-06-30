@@ -1,5 +1,6 @@
 #import
 import turtle, random, winsound, webbrowser, sys, base64, string, gc, json, ctypes, os
+import time
 import tkinter as tk
 from tkinter import ttk
 from tkinter import *
@@ -19,7 +20,7 @@ if os.path.isfile(os.path.join(application_path, "settings.json")):
     pass
 elif not os.path.isfile(os.path.join(application_path, "settings.json")):
     with open("settings.json", 'w+') as file:
-        file.write('lastskin":0, "lastmusic":0, "lastauto":0, "lastboost":0, "lasttrail":0, "lastcons":0, "lastdiff":0}')
+        file.write('{"lastskin":1, "lastmusic":0, "lastauto":0, "lastboost":0, "lasttrail":0, "lastcons":false, "lastspeed":5, "lastrgb":0, "lastbgcolor":[0, 0, 0], "lasttrailcolor":[255, 0, 0]}')
         file.close()
 else:
     pass
@@ -65,6 +66,19 @@ console_toggle = 0
 data=0
 settings=0
 url="https://youtu.be/dQw4w9WgXcQ"
+last_key = None
+act="hax.bind('<KeyPress>', keypress_handler)"
+hax = 0
+colr = (255, 0, 0)
+clbg = (0, 0, 0)
+cl = tk.StringVar()
+cl2 = tk.StringVar()
+le=Label()
+txt = string.ascii_letters + string.digits
+cod = ''.join(random.choice(txt) for i in range(16))
+cod16 = base64.b16encode(cod.encode('utf-8'))
+cod16 = cod16.decode("utf-8")
+password_entry = Entry()
 #bgfunc
 def bgfg():
     global bg
@@ -117,7 +131,7 @@ def loadsettings():
     with open("settings.json", "r") as settingsfile:
         global settings
         try:
-            global settings, music, skin, Autovar, boostvar, Trailvar, console_toggle, speed, rgbvar
+            global settings, music, skin, Autovar, boostvar, Trailvar, console_toggle, speed, rgbvar, clbg, colr
             settings = json.load(settingsfile)
             music=settings["lastmusic"]
             skin=settings["lastskin"]
@@ -127,15 +141,16 @@ def loadsettings():
             console_toggle=settings["lastcons"]
             speed=settings["lastspeed"]
             rgbvar=settings["lastrgb"]
+            clbg=settings["lastbgcolor"]
+            colr=settings["lasttrailcolor"]
             apply2()
-            
         except:
             tkinter.messagebox.showinfo("Config file error", "Invalid config file detected! Attempted to reset")
             with open("settings.json", 'w+') as rsettingfile:
-                rsettingfile.write('{"lastskin":1, "lastmusic":0, "lastauto":0, "lastboost":0, "lasttrail":0, "lastcons":0, "lastspeed":5, "lastrgb":0}')
+                rsettingfile.write('{"lastskin":1, "lastmusic":0, "lastauto":0, "lastboost":0, "lasttrail":0, "lastcons":false, "lastspeed":5, "lastrgb":0, "lastbgcolor":[0, 0, 0], "lasttrailcolor":[255, 0, 0]}')
                 rsettingfile.close()
 def savesettings():
-    global music, skin, Autovar, boostvar, Trailvar, console_toggle, speed, rgbvar
+    global music, skin, Autovar, boostvar, Trailvar, console_toggle, speed, rgbvar, clbg, colr
     print(type(Autovar))
     if str(type(Autovar)) == "<class 'tkinter.IntVar'>":
         settingssave = {
@@ -147,6 +162,8 @@ def savesettings():
                     "lastcons": console_toggle,
                     "lastspeed": speed,
                     "lastrgb": rgbvar.get(),
+                    "lastbgcolor":clbg,
+                    "lasttrailcolor":colr,
             }
     else:
         settingssave = {
@@ -158,12 +175,14 @@ def savesettings():
                     "lastcons": console_toggle,
                     "lastspeed": speed,
                     "lastrgb": rgbvar,
+                    "lastbgcolor":clbg,
+                    "lasttrailcolor":colr,
             }
     with open("settings.json", 'w') as wsettingfile:
         json.dump(settingssave, wsettingfile)
 def resetsettings():
     with open("settings.json", 'w+') as wsettingfile:
-        wsettingfile.write('{"lastskin":1, "lastmusic":0, "lastauto":0, "lastboost":0, "lasttrail":0, "lastcons":0, "lastspeed":5, "lastrgb":0}')
+        wsettingfile.write('{"lastskin":1, "lastmusic":0, "lastauto":0, "lastboost":0, "lasttrail":0, "lastcons":false, "lastspeed":5, "lastrgb":0, "lastbgcolor":[0, 0, 0], "lasttrailcolor":[255, 0, 0]}')
         wsettingfile.close()
 #skinfunc
 def skin1():
@@ -341,11 +360,11 @@ def btt():
     button = ttk.Button(root, text="Myth", command=myth)
     button.place(x=320, y=400)
     button = ttk.Button(root, text="Easy", command=ez)
-    button.place(x=80, y=60)
+    button.place(x=70, y=60)
     button = ttk.Button(root, text="Normal", command=norm)
     button.place(x=160, y=60)
     button = ttk.Button(root, text="Hard", command=hard)
-    button.place(x=240, y=60)
+    button.place(x=250, y=60)
     button = ttk.Button(root, text="START", command=root.destroy)
     button.place(x=160, y=150)
 btt()
@@ -401,11 +420,6 @@ helpmenu.add_command(label="About", command=about)
 menubar.add_cascade(label="Help", menu=helpmenu)
 
 #p2wset
-txt = string.ascii_letters + string.digits
-cod = ''.join(random.choice(txt) for i in range(16))
-cod16 = base64.b16encode(cod.encode('utf-8'))
-cod16 = cod16.decode("utf-8")
-password_entry = Entry()
 def test():
     global password_entry, value
     value = str(password_entry.get())
@@ -432,10 +446,37 @@ def box():
     login_button.pack(fill='x', expand=True, pady=10)
     reqb = ttk.Button(signin, text="Request Code", command=lambda:tk.messagebox.showinfo("RequestCode", cod16))
     reqb.pack(fill='x', expand=True, pady=10)
-#devwindow
-last_key = None
-act="hax.bind('<KeyPress>', keypress_handler)"
-hax = 0
+#settingswindow
+def callback1(box, arg):
+    global colr
+    global le
+    arg = arg.get()
+    if len(arg) != 7:
+        le = Label(hax, text = "Input must contain 7 characters\n(e.g. #42e0f5)", fg="#ff1605", bd=1)
+        le.place(x=90, y=20)
+        le.after(1000, le.destroy)
+        box.delete(0, tk.END)
+    else:
+       colr = h2rgb(arg)
+
+def callback2(box, arg):
+    global clbg
+    global le
+    arg = arg.get()
+    if len(arg) != 7:
+        le = Label(hax, text = "Input must contain 7 characters\n(e.g. #42e0f5)", fg="#ff1605", bd=1)
+        le.place(x=90, y=20)
+        le.after(1000, le.destroy)
+        box.delete(0, END)
+    else:
+       clbg = h2rgb(arg)
+
+def h2rgb(value):
+    value = value.lstrip('#')
+    lv = len(value)
+    return tuple(int(value[i:i + lv // 3], 16) for i in range(0, lv, lv // 3))
+
+
 def hece():
     global hax
     global music
@@ -443,7 +484,7 @@ def hece():
     global act
     hax = tkinter.Toplevel(None)
     hax.title("Settings")
-    hax.geometry('250x200')
+    hax.geometry('290x200')
     hax.resizable(False, False)
     Dev = Menu(hax)
     hax.config(menu=Dev)
@@ -452,19 +493,36 @@ def hece():
     hskin.add_radiobutton(label="Skin2", command=skinsc2)
     hskin.add_radiobutton(label="Skin3", command=skinsc3)
     Dev.add_cascade(label="Secret Skin", menu=hskin, underline=0)
-    wspeed = ttk.Scale(hax, from_=0, to=10, orient=HORIZONTAL)
-    wspeed.place(x=0, y=85)
-    l = Label(hax, text = speed)
-    l.place(x=200, y=85)
+    l = Label(hax, text = speed, bd = 0)
+    l.place(x=140, y=86)
     def apply():
         global speed
         speed = round(wspeed.get())
         l = Label(hax, text = speed)
-        l.place(x=200, y=85)
-    button = ttk.Button(hax, text="Apply speed", command=apply)
+        l.place(x=140, y=86)
+    l = Label(hax, text = "Customize trail color:", bd=0)
+    l.place(x=90, y=0)
+    btn = tk.Button(hax, text='✅', command=lambda: callback1(color_entry, cl), borderwidth=0, fg="#05ff09")
+    btn.place(x=260, y=-1)
+    color_entry=ttk.Entry(hax, textvariable=cl, width=6)
+    color_entry.place(x=210, y=0)
+
+    l2 = Label(hax, text = "Customize BG color:", bd=0)
+    l2.place(x=90, y=30)
+    btn2 = tk.Button(hax, text='✅', command=lambda: callback2(bg_entry, cl2), borderwidth=0, fg="#05ff09")
+    btn2.place(x=260, y=30)
+    bg_entry=ttk.Entry(hax, textvariable=cl2, width=6)
+    bg_entry.place(x=210, y=30)
+
+    
+    separator = ttk.Separator(hax, orient='vertical')
+    separator.place(relx=0.3, rely=0, relheight=0.4)
+    button = tk.Button(hax, text="✅", command=apply, borderwidth=0, fg="#05ff09")
     button.place(x=110, y=85)
     button = ttk.Button(hax, text="Show console", command=apply2)
-    button.place(x=100, y=0)
+    button.place(x=200, y=170)
+    button = ttk.Button(hax, text="Clear command", command=lambda: cmd_entry.delete(0, END))
+    button.place(x=100, y=170)
     boostchk = ttk.Checkbutton(hax, text='Boost',variable=boostvar, onvalue=1, offvalue=0)
     boostchk.place(x=0, y=40)
     boostchk = ttk.Checkbutton(hax, text='Trail',variable=Trailvar, onvalue=1, offvalue=0)
@@ -473,13 +531,15 @@ def hece():
     boostchk.place(x=0, y=0)
     boostchk = ttk.Checkbutton(hax, text='RGB',variable=rgbvar, onvalue=1, offvalue=0)
     boostchk.place(x=0, y=60)
+    wspeed = ttk.Scale(hax, from_=0, to=10, orient=HORIZONTAL)
+    wspeed.place(x=0, y=85)
     cmd_entry=ttk.Entry(hax,width=40)
     cmd_entry.place(x=0, y=133)
     #if there are more custom var,put it inside string below
-    l = Label(hax, text = "Enter debug command below!")
+    l = Label(hax, text = "Enter debug command below!", bd=0)
     l.place(x=0, y=111)
     button3 = ttk.Button(hax, text="Run command!", command=lambda: exec("global bg, label1, label2, speed, boostvar, skin, music, Autovar, Trailvar, url, loaded, txt, cod, cod16, console_toggle, root, data, rgbvar\n"+cmd_entry.get()))
-    button3.place(x=80, y=170)
+    button3.place(x=5, y=170)
     def keypress_handler(event):
         global last_key
         global act
@@ -510,7 +570,7 @@ def on_close():
     running = 0
 rotwn.protocol("WM_DELETE_WINDOW", on_close)
 wn.title(0)
-wn.bgcolor("black")
+wn.bgcolor(clbg)
 running = 1
 paused = 0
 turtle.register_shape('skin1.gif')
@@ -633,22 +693,31 @@ elif (skin==16):
     turtle.shape("cat.gif")
     img = tkinter.Image("photo", file = "cat.gif")
     turtle._Screen._root.iconphoto(True, img)
-turtle.shapesize(50,50)
 turtle.penup()
 if str(type(Trailvar)) == "<class 'tkinter.IntVar'>":
     if(Trailvar.get()==1):
         trailed=1
-        turtle.color('red')
+        turtle.color(colr)
         turtle.pendown()
     elif(Trailvar.get()==0):
         turtle.penup()
 else:
     if(Trailvar==1):
         trailed=1
-        turtle.color('red')
+        turtle.color(colr)
         turtle.pendown()
     elif(Trailvar==0):
         turtle.penup()
+if (str(type(rgbvar)) == "<class 'tkinter.IntVar'>" and trailed == 1):
+    if (rgbvar.get()==1):
+        turtle.color(random.randint(0,255), random.randint(0,255), random.randint(0,255))
+    else:
+        pass
+elif (str(type(rgbvar)) == "<class 'int'>" and trailed == 1):
+    if (rgbvar==1):
+        turtle.color(random.randint(0,255), random.randint(0,255), random.randint(0,255))
+else:
+    pass
 turtle.speed(speed)
 
 #boundnclk
@@ -683,6 +752,20 @@ while running == 1:
                 n=n+o
             n=n+o
             turtle.title(n)
+            if (str(type(rgbvar)) == "<class 'tkinter.IntVar'>" and trailed == 1):
+                if (rgbvar.get()==1):
+                    t_end = time.time() + 0.0005
+                    while time.time() < t_end:
+                        turtle.color(random.randint(0,255), random.randint(0,255), random.randint(0,255))
+                else:
+                    pass
+            elif (str(type(rgbvar)) == "<class 'int'>" and trailed == 1):
+                if (rgbvar==1):
+                    t_end = time.time() + 0.0005
+                    while time.time() < t_end:
+                        turtle.color(random.randint(0,255), random.randint(0,255), random.randint(0,255))
+                else:
+                    pass
         else:
             pass
     if (running==0):
@@ -731,16 +814,6 @@ while running == 1:
     else:
         if (Autovar==1):
             turtle.onclick(fxn(xin,yin))
-        else:
-            turtle.onclick(fxn)
-    if (str(type(rgbvar)) == "<class 'tkinter.IntVar'>" and trailed == 1):
-        if (rgbvar.get()==1):
-            turtle.color(random.randint(0,255), random.randint(0,255), random.randint(0,255))
-        else:
-            turtle.onclick(fxn)
-    elif (str(type(rgbvar)) == "<class 'int'>" and trailed == 1):
-        if (rgbvar==1):
-            turtle.color(random.randint(0,255), random.randint(0,255), random.randint(0,255))
         else:
             turtle.onclick(fxn)
     turtle.onclick(fxn)
@@ -810,6 +883,11 @@ while running == 1:
         music.add_radiobutton(label="Chad", command=lambda:winsound.PlaySound('chad.wav', winsound.SND_ASYNC | winsound.SND_LOOP))
         music.add_radiobutton(label="Brick", command=lambda:winsound.PlaySound('brick.wav', winsound.SND_ASYNC | winsound.SND_LOOP))
         menubar.add_cascade(label="Music", menu=music)
+        savemenu = Menu(menubar, tearoff=0)
+        savemenu.add_command(label="Reset Progress", command=resetsavefile)
+        savemenu.add_command(label="Save Settings", command=savesettings)
+        savemenu.add_command(label="Reset Settings", command=resetsettings)
+        menubar.add_cascade(label="Savefile", menu=savemenu)
         def rpl():
             global n
             turtle.speed(0)
