@@ -118,6 +118,8 @@ def bgfg():
         music=6
     elif skin==16:
         bg = PhotoImage(file = "cat.gif")
+    elif skin==17:
+        bg = PhotoImage(file = "ronaldo2.gif")
     elif skin==127:
         bg = PhotoImage(file = "skin50.gif")
     label1 = Label(root, image = bg)
@@ -125,6 +127,7 @@ def bgfg():
     label2= Label(root, image = bg)
     label2.place(x = 0,y = 240)
     btt()
+
 #loadsettings
 def loadsettings():
     global settings
@@ -230,6 +233,11 @@ def ronaldo():
     skin=11
     bgfg()
     btt()
+def ronaldo2():
+    global skin
+    skin=17
+    bgfg()
+    btt()
 def chad():
     global skin
     skin=12
@@ -266,9 +274,14 @@ def cat():
     skin=16
     bgfg()
     btt()
+def ronaldo2():
+    global skin
+    skin=17
+    bgfg()
+    btt()
 def rndskn():
     global skin
-    skin=random.randint(1,16)
+    skin=random.randint(1,17)
     bgfg()
     btt()
 #miscFunc
@@ -277,7 +290,16 @@ def hidden():
 def myth():
         tkinter.messagebox.showinfo("369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369",  "369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369 369" )
 def about():
-    tkinter.messagebox.showinfo("About","Made with fun by EnderMCDev")
+    abt = tkinter.Toplevel(None)
+    abt.title("About")
+    abt.geometry('310x200')
+    abt.resizable(False, False)
+    i = Label(abt, text = "AmogusClick",font=("Segoe UI", 15))
+    i.pack(expand=True)
+    i = Label(abt, text = "Version v1.13 \n EnderMinecraft")
+    i.pack(expand=True)
+    i = Label(abt, text = "Website: \n https://github.com/EnderMinecraft/AmogusCLICK")
+    i.pack(side=BOTTOM)
 def helpme():
     tkinter.messagebox.showinfo("Help","Choose Difficulty & Skin and press start. Your goal is reach as much point as possible by clicking the image")
 def start():
@@ -391,6 +413,7 @@ skinmenu.add_radiobutton(label="Chip", command=chip)
 skinmenu.add_radiobutton(label="Potato", command=potato)
 skinmenu.add_radiobutton(label="Brick", command=brick)
 skinmenu.add_radiobutton(label="Cat", command=cat)
+skinmenu.add_radiobutton(label="Ronaldo2", command=ronaldo2)
 skinmenu.add_radiobutton(label="Random", command=rndskn)
 menubar.add_cascade(label="Skin", menu=skinmenu)
 
@@ -603,6 +626,7 @@ turtle.register_shape('chip.gif')
 turtle.register_shape('potato.gif')
 turtle.register_shape('brick.gif')
 turtle.register_shape('cat.gif')
+turtle.register_shape('ronaldo2.gif')
 wn.setup(1000,700)
 if(music==0):
     winsound.PlaySound("main.wav", winsound.SND_ASYNC | winsound.SND_LOOP)
@@ -707,6 +731,10 @@ elif (skin==15):
 elif (skin==16):
     turtle.shape("cat.gif")
     img = tkinter.Image("photo", file = "cat.gif")
+    turtle._Screen._root.iconphoto(True, img)
+elif (skin==17):
+    turtle.shape("ronaldo2.gif")
+    img = tkinter.Image("photo", file = "ronaldo2.gif")
     turtle._Screen._root.iconphoto(True, img)
 turtle.penup()
 if str(type(Trailvar)) == "<class 'tkinter.IntVar'>":
@@ -888,6 +916,7 @@ while running == 1:
         skin.add_radiobutton(label="Potato", command=lambda:turtle.shape("potato.gif"))
         skin.add_radiobutton(label="Brick", command=lambda:turtle.shape("brick.gif"))
         skin.add_radiobutton(label="Cat", command=lambda:turtle.shape("cat.gif"))
+        skin.add_radiobutton(label="Ronaldo2", command=lambda:turtle.shape("rol2.gif"))
         menubar.add_cascade(label="Skin", menu=skin)
         music = Menu(menubar, tearoff=0)
         music.add_radiobutton(label="CTAC(Default)", command=lambda:winsound.PlaySound('main.wav', winsound.SND_ASYNC | winsound.SND_LOOP))
