@@ -1,6 +1,7 @@
 #import
-import turtle, random, winsound, webbrowser, sys, base64, string, gc, json, ctypes, os
-import time
+import turtle, random, winsound, webbrowser, sys, base64, string, gc, json, ctypes, os, requests, urllib, time
+from threading import Thread
+import threading
 import tkinter as tk
 from tkinter import ttk
 from tkinter import *
@@ -65,6 +66,7 @@ loaded=0
 console_toggle = 0
 data=0
 settings=0
+current="1.14"
 url="https://youtu.be/dQw4w9WgXcQ"
 last_key = None
 act="hax.bind('<KeyPress>', keypress_handler)"
@@ -285,6 +287,21 @@ def rndskn():
     bgfg()
     btt()
 #miscFunc
+hostdata=""
+def updatecheck():
+    global hostdata
+    hosts = urllib.request.urlopen('https://enderminecraft.github.io/ver.txt')
+    hostdata = hosts.read()
+    if (str(hostdata.strip().decode('utf-8')) == current):
+        tkinter.messagebox.showinfo(" ", "App is up to date!")
+    else:
+        msg_box = tk.messagebox.askquestion("Update", "App is not up to date! App is on version " + current + " but lastest version is " + str(hostdata.strip().decode('utf-8')) + "!.Do you want to update?")
+        if msg_box == 'yes':
+            tkinter.messagebox.showinfo("Info", "Downloading new version now!.Application will freeze until download is complete(bug)!")
+            newVersion = requests.get("https://github.com/enderMinecraft/AmogusCLICK/releases/latest/download/Installer.exe")
+            open("installer.exe", "wb").write(newVersion.content)
+            os.system("start .\installer.exe")
+            on_exit()
 def hidden():
     tkinter.messagebox.showinfo("hi", "hi")
 def myth():
@@ -296,10 +313,12 @@ def about():
     abt.resizable(False, False)
     i = Label(abt, text = "AmogusClick",font=("Segoe UI", 15))
     i.pack(expand=True)
-    i = Label(abt, text = "Version v1.13 \n EnderMinecraft")
+    i = Label(abt, text = "Version " + current + "\n EnderMinecraft")
     i.pack(expand=True)
     i = Label(abt, text = "Website: \n https://github.com/EnderMinecraft/AmogusCLICK")
-    i.pack(side=BOTTOM)
+    i.pack(expand=True)
+    button = ttk.Button(abt, text="Check for update", command=updatecheck)
+    button.pack(side=BOTTOM)
 def helpme():
     tkinter.messagebox.showinfo("Help","Choose Difficulty & Skin and press start. Your goal is reach as much point as possible by clicking the image")
 def start():
