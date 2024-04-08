@@ -1,10 +1,8 @@
 #import
-import turtle, random, winsound, webbrowser, sys, base64, string, gc, json, ctypes, os, time,urllib, requests
-import threading
+import turtle, random, winsound, webbrowser, sys, base64, string, gc, json, ctypes, os, time,urllib, requests, threading
 import tkinter as tk
 from tkinter import ttk
 from tkinter import *
-import sv_ttk
 import tkinter.messagebox
 ctypes.windll.user32.ShowWindow(ctypes.windll.kernel32.GetConsoleWindow(), 0)
 if getattr(sys, 'frozen', False):
@@ -51,10 +49,6 @@ label2= Label(root, image = bg)
 label2.place(x = 0,y = 240)
 l = Label(root, text = "Gamemode is EASY", bg="indigo", fg='#FFFFFF')
 l.pack()
-style = ttk.Style()
-style.theme_use('vista')
-style.configure('TButton', background = '#131313', foreground = 'white')
-style.map('TButton', background=[('active','#343434')])
 #varset
 n=0
 o=1
@@ -557,14 +551,6 @@ def hece():
     hskin.add_radiobutton(label="Skin2", command=skinsc2)
     hskin.add_radiobutton(label="Skin3", command=skinsc3)
     Dev.add_cascade(label="Secret Skin", menu=hskin, underline=0)
-    themes = Menu(Dev, tearoff=0)
-    themes.add_radiobutton(label="Windows Default", command=style.theme_use('vista'))
-    themes.add_radiobutton(label="Dark Theme", command=style.theme_use('alt'))
-    themes.add_radiobutton(label="Clam", command=style.theme_use('clam'))
-    themes.add_radiobutton(label="Classic Theme", command=style.theme_use('winnative'))
-    themes.add_radiobutton(label="Default TTK", command=style.theme_use('default'))
-    themes.add_radiobutton(label="XP native", command=style.theme_use('xpnative'))
-    Dev.add_cascade(label="Themes", menu=themes, underline=0)
     l = Label(hax, text = speed, bd = 0)
     l.place(x=140, y=86)
     def apply():
