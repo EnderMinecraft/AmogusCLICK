@@ -1,10 +1,10 @@
 #import
-import turtle, random, winsound, webbrowser, sys, base64, string, gc, json, ctypes, os, requests, urllib, time
-from threading import Thread
+import turtle, random, winsound, webbrowser, sys, base64, string, gc, json, ctypes, os, time,urllib, requests
 import threading
 import tkinter as tk
 from tkinter import ttk
 from tkinter import *
+import sv_ttk
 import tkinter.messagebox
 ctypes.windll.user32.ShowWindow(ctypes.windll.kernel32.GetConsoleWindow(), 0)
 if getattr(sys, 'frozen', False):
@@ -51,6 +51,10 @@ label2= Label(root, image = bg)
 label2.place(x = 0,y = 240)
 l = Label(root, text = "Gamemode is EASY", bg="indigo", fg='#FFFFFF')
 l.pack()
+style = ttk.Style()
+style.theme_use('vista')
+style.configure('TButton', background = '#131313', foreground = 'white')
+style.map('TButton', background=[('active','#343434')])
 #varset
 n=0
 o=1
@@ -66,7 +70,7 @@ loaded=0
 console_toggle = 0
 data=0
 settings=0
-current="1.14"
+current="1.15"
 url="https://youtu.be/dQw4w9WgXcQ"
 last_key = None
 act="hax.bind('<KeyPress>', keypress_handler)"
@@ -129,7 +133,6 @@ def bgfg():
     label2= Label(root, image = bg)
     label2.place(x = 0,y = 240)
     btt()
-
 #loadsettings
 def loadsettings():
     global settings
@@ -156,7 +159,6 @@ def loadsettings():
                 rsettingfile.close()
 def savesettings():
     global music, skin, Autovar, boostvar, Trailvar, console_toggle, speed, rgbvar, clbg, colr
-    print(type(Autovar))
     if str(type(Autovar)) == "<class 'tkinter.IntVar'>":
         settingssave = {
                     "lastskin": skin,
@@ -286,22 +288,31 @@ def rndskn():
     skin=random.randint(1,17)
     bgfg()
     btt()
-#miscFunc
+#corefeature
 hostdata=""
+def start():
+    root.quit()
 def updatecheck():
     global hostdata
     hosts = urllib.request.urlopen('https://enderminecraft.github.io/ver.txt')
     hostdata = hosts.read()
     if (str(hostdata.strip().decode('utf-8')) == current):
         tkinter.messagebox.showinfo(" ", "App is up to date!")
-    else:
+    elif (str(hostdata.strip().decode('utf-8')) != current):
         msg_box = tk.messagebox.askquestion("Update", "App is not up to date! App is on version " + current + " but lastest version is " + str(hostdata.strip().decode('utf-8')) + "!.Do you want to update?")
         if msg_box == 'yes':
-            tkinter.messagebox.showinfo("Info", "Downloading new version now!.Application will freeze until download is complete(bug)!")
-            newVersion = requests.get("https://github.com/enderMinecraft/AmogusCLICK/releases/latest/download/Installer.exe")
-            open("installer.exe", "wb").write(newVersion.content)
-            os.system("start .\installer.exe")
-            on_exit()
+            def upd():
+                newVersion = requests.get("https://github.com/enderMinecraft/AmogusCLICK/releases/latest/download/Installer.exe")
+                open("installer.exe", "wb").write(newVersion.content)
+                qsn = msg_box = tk.messagebox.askquestion(" ", "Download complete! Would you want to install update right now?")
+                if qsn == 'yes':
+                    os.system("start .\installer.exe")
+                    os.kill(os.getpid(), True)
+                if qsn == 'no':
+                    updthread.Terminate()
+            updthread = threading.Thread(target=upd)
+            updthread.start()
+#optionalfeature
 def hidden():
     tkinter.messagebox.showinfo("hi", "hi")
 def myth():
@@ -321,10 +332,9 @@ def about():
     button.pack(side=BOTTOM)
 def helpme():
     tkinter.messagebox.showinfo("Help","Choose Difficulty & Skin and press start. Your goal is reach as much point as possible by clicking the image")
-def start():
-    root.quit()
 def rig():
     webbrowser.open_new(url)
+#filesave
 def read():
     global data
     with open("savefile.json", "r") as infile:
@@ -461,7 +471,7 @@ helpmenu.add_command(label="Myth", command=myth)
 helpmenu.add_command(label="About", command=about)
 menubar.add_cascade(label="Help", menu=helpmenu)
 
-#p2wset
+#hiddenlock
 def test():
     global password_entry, value
     value = str(password_entry.get())
@@ -494,7 +504,7 @@ def callback1(box, arg):
     global le
     arg = arg.get()
     if len(arg) != 7:
-        le = Label(hax, text = "Input must contain 7 characters\n(e.g. #42e0f5)", fg="#ff1605", bd=1)
+        le = Label(hax, text = "Invalid Hex value\n(e.g. #42e0f5)", fg="#ff1605", bd=1)
         le.place(x=90, y=50)
         le.after(1000, le.destroy)
         box.delete(0, tk.END)
@@ -506,7 +516,7 @@ def callback2(box, arg):
     global le
     arg = arg.get()
     if len(arg) != 7:
-        le = Label(hax, text = "Input must contain 7 characters\n(e.g. #42e0f5)", fg="#ff1605", bd=1)
+        le = Label(hax, text = "Invalid Hex value\n(e.g. #42e0f5)", fg="#ff1605", bd=1)
         le.place(x=90, y=50)
         le.after(1000, le.destroy)
         box.delete(0, END)
@@ -547,6 +557,14 @@ def hece():
     hskin.add_radiobutton(label="Skin2", command=skinsc2)
     hskin.add_radiobutton(label="Skin3", command=skinsc3)
     Dev.add_cascade(label="Secret Skin", menu=hskin, underline=0)
+    themes = Menu(Dev, tearoff=0)
+    themes.add_radiobutton(label="Windows Default", command=style.theme_use('vista'))
+    themes.add_radiobutton(label="Dark Theme", command=style.theme_use('alt'))
+    themes.add_radiobutton(label="Clam", command=style.theme_use('clam'))
+    themes.add_radiobutton(label="Classic Theme", command=style.theme_use('winnative'))
+    themes.add_radiobutton(label="Default TTK", command=style.theme_use('default'))
+    themes.add_radiobutton(label="XP native", command=style.theme_use('xpnative'))
+    Dev.add_cascade(label="Themes", menu=themes, underline=0)
     l = Label(hax, text = speed, bd = 0)
     l.place(x=140, y=86)
     def apply():
