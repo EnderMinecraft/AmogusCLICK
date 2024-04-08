@@ -504,6 +504,8 @@ def callback1(box, arg):
         box.delete(0, tk.END)
     else:
        colr = h2rgb(arg)
+       l1 = Label(hax, text = "     ", bd = 0, bg = arg)
+       l1.place(x=282, y=3)
 
 def callback2(box, arg):
     global clbg
@@ -516,6 +518,8 @@ def callback2(box, arg):
         box.delete(0, END)
     else:
        clbg = h2rgb(arg)
+       l1 = Label(hax, text = "     ", bd = 0, bg = arg)
+       l1.place(x=282, y=33)
 
 def h2rgb(value):
     value = value.lstrip('#')
