@@ -64,7 +64,7 @@ loaded=0
 console_toggle = 0
 data=0
 settings=0
-current="1.15"
+current="1.16"
 url="https://youtu.be/dQw4w9WgXcQ"
 last_key = None
 act="hax.bind('<KeyPress>', keypress_handler)"
@@ -76,8 +76,7 @@ cl2 = tk.StringVar()
 le=Label()
 txt = string.ascii_letters + string.digits
 cod = ''.join(random.choice(txt) for i in range(16))
-cod16 = base64.b16encode(cod.encode('utf-8'))
-cod16 = cod16.decode("utf-8")
+cod16 = base64.b16encode(cod.encode('utf-8')).decode("utf-8")
 password_entry = Entry()
 #bgfunc
 def bgfg():
