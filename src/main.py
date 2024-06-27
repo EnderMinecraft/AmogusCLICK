@@ -64,7 +64,7 @@ loaded=0
 console_toggle = 0
 data=0
 settings=0
-current="1.16"
+current="1.17"
 url="https://youtu.be/dQw4w9WgXcQ"
 last_key = None
 act="hax.bind('<KeyPress>', keypress_handler)"
@@ -83,7 +83,6 @@ def bgfg():
     global bg
     global label1
     global label2
-    global music
     label1.destroy()
     label2.destroy()
     if skin==1:
@@ -100,21 +99,16 @@ def bgfg():
         bg = PhotoImage(file = "gegg.gif")
     elif skin==10:
         bg = PhotoImage(file = "mono.gif")
-        music=1
     elif skin==11:
         bg = PhotoImage(file = "ronaldo.gif")
-        music=3
     elif skin==12:
         bg = PhotoImage(file = "chad.gif")
-        music=5
     elif skin==13:
         bg = PhotoImage(file = "chip.gif")
-        music=4
     elif skin==14:
         bg = PhotoImage(file = "potato.gif")
     elif skin==15:
         bg = PhotoImage(file = "brick.gif")
-        music=6
     elif skin==16:
         bg = PhotoImage(file = "cat.gif")
     elif skin==17:
@@ -185,97 +179,20 @@ def resetsettings():
         wsettingfile.write('{"lastskin":1, "lastmusic":0, "lastauto":0, "lastboost":0, "lasttrail":0, "lastcons":false, "lastspeed":5, "lastrgb":0, "lastbgcolor":[0, 0, 0], "lasttrailcolor":[255, 0, 0]}')
         wsettingfile.close()
 #skinfunc
-def skin1():
-    global skin
-    skin=1
-    bgfg()
-    btt()
-def skin2():
-    global skin
-    skin=2
-    bgfg()
-    btt()
-def skin3():
-    global skin
-    skin=3
-    bgfg()
-    btt()
-def skin4():
-    global skin
-    skin=4
-    bgfg()
-    btt()
-def egg():
-    global skin
-    skin=5
-    bgfg()
-    btt()
-def gegg():
-    global skin
-    skin=6
-    bgfg()
-    btt()
-def skinhax():
-    global skin
-    skin=127
-    bgfg()
-    btt()
-def mono():
-    global skin
-    skin=10
-    bgfg()
-    btt()
-def ronaldo():
-    global skin
-    skin=11
-    bgfg()
-    btt()
-def ronaldo2():
-    global skin
-    skin=17
-    bgfg()
-    btt()
-def chad():
-    global skin
-    skin=12
-    bgfg()
-    btt()
-def chip():
-    global skin
-    skin=13
-    bgfg()
-    btt()
-def potato():
-    global skin
-    skin=14
-    bgfg()
-    btt()
-def brick():
-    global skin
-    skin=15
-    bgfg()
-    btt()
-def skinsc1():
+def genskin(id):
     global skin
     global music
-    skin=7
-    music=2
-def skinsc2():
-    global skin
-    skin=8
-def skinsc3():
-    global skin
-    skin=9
-def cat():
-    global skin
-    skin=16
-    bgfg()
-    btt()
-def ronaldo2():
-    global skin
-    skin=17
-    bgfg()
-    btt()
+    if id not in [7,8,9]:
+        skin = id
+        bgfg()
+        btt()
+    elif id == 7 :
+        skin = id
+        music= 2
+    elif id == 8 :
+        skin = id
+    elif id == 9 :
+        skin = id
 def rndskn():
     global skin
     skin=random.randint(1,17)
@@ -378,27 +295,9 @@ def hard():
         l.pack()
 
 #musicfunc
-def md():
+def genm(id):
     global music
-    music=0
-def mm():
-    global music
-    music=1
-def mr():
-    global music
-    music=2
-def mro():
-    global music
-    music=3
-def mch():
-    global music
-    music=4
-def mad():
-    global music
-    music=5
-def mbr():
-    global music
-    music=6
+    music = id
 #inzsetupbutton
 def btt():
     button = ttk.Button(root, text="Myth", command=myth)
@@ -422,31 +321,31 @@ diffmenu.add_radiobutton(label="Hard", command=hard)
 menubar.add_cascade(label="Difficulty", menu=diffmenu)
 
 skinmenu = Menu(menubar, tearoff=0)
-skinmenu.add_radiobutton(label="Pmogus(Default)", command=skin1)
-skinmenu.add_radiobutton(label="Pimogus", command=skin2)
-skinmenu.add_radiobutton(label="Bmogus", command=skin3)
-skinmenu.add_radiobutton(label="RMOGUS", command=skin4)
-skinmenu.add_radiobutton(label="Egg", command=egg)
-skinmenu.add_radiobutton(label="Golden Egg", command=gegg)
-skinmenu.add_radiobutton(label="MONO", command=mono)
-skinmenu.add_radiobutton(label="Ronaldo", command=ronaldo)
-skinmenu.add_radiobutton(label="GigaChad", command=chad)
-skinmenu.add_radiobutton(label="Chip", command=chip)
-skinmenu.add_radiobutton(label="Potato", command=potato)
-skinmenu.add_radiobutton(label="Brick", command=brick)
-skinmenu.add_radiobutton(label="Cat", command=cat)
-skinmenu.add_radiobutton(label="Ronaldo2", command=ronaldo2)
+skinmenu.add_radiobutton(label="Pmogus(Default)", command= lambda: genskin(1))
+skinmenu.add_radiobutton(label="Pimogus", command=lambda: genskin(2))
+skinmenu.add_radiobutton(label="Bmogus", command=lambda: genskin(3))
+skinmenu.add_radiobutton(label="RMOGUS", command=lambda: genskin(4))
+skinmenu.add_radiobutton(label="Egg", command=lambda: genskin(5))
+skinmenu.add_radiobutton(label="Golden Egg", command=lambda: genskin(6))
+skinmenu.add_radiobutton(label="MONO", command=lambda: genskin(10))
+skinmenu.add_radiobutton(label="Ronaldo", command=lambda: genskin(11))
+skinmenu.add_radiobutton(label="GigaChad", command=lambda: genskin(12))
+skinmenu.add_radiobutton(label="Chip", command=lambda: genskin(13))
+skinmenu.add_radiobutton(label="Potato", command=lambda: genskin(14))
+skinmenu.add_radiobutton(label="Brick", command=lambda: genskin(15))
+skinmenu.add_radiobutton(label="Cat", command=lambda: genskin(16))
+skinmenu.add_radiobutton(label="Ronaldo2", command=lambda: genskin(17))
 skinmenu.add_radiobutton(label="Random", command=rndskn)
 menubar.add_cascade(label="Skin", menu=skinmenu)
 
 musicmenu = Menu(menubar, tearoff=0)
-musicmenu.add_radiobutton(label="CTAC(Default)", command=md)
-musicmenu.add_radiobutton(label="Rick", command=mr)
-musicmenu.add_radiobutton(label="MONO", command=mm)
-musicmenu.add_radiobutton(label="Ronaldo", command=mro)
-musicmenu.add_radiobutton(label="Potato&Chips", command=mch)
-musicmenu.add_radiobutton(label="Chad", command=mad)
-musicmenu.add_radiobutton(label="Brick", command=mbr)
+musicmenu.add_radiobutton(label="CTAC(Default)", command=lambda:genm(0))
+musicmenu.add_radiobutton(label="Rick", command=lambda:genm(2))
+musicmenu.add_radiobutton(label="MONO", command=lambda:genm(1))
+musicmenu.add_radiobutton(label="Ronaldo", command=lambda:genm(3))
+musicmenu.add_radiobutton(label="Potato&Chips", command=lambda:genm(4))
+musicmenu.add_radiobutton(label="Chad", command=lambda:genm(5))
+musicmenu.add_radiobutton(label="Brick", command=lambda:genm(6))
 menubar.add_cascade(label="Music", menu=musicmenu)
 
 savemenu = Menu(menubar, tearoff=0)
@@ -469,7 +368,7 @@ def test():
     global password_entry, value
     value = str(password_entry.get())
     if value == cod:
-        skinhax()
+        genskin(127)
         tkinter.messagebox.showinfo("Correct","Got it man!")
     elif value == "SHOW":
         tkinter.messagebox.showinfo("ACTCODE",cod)
@@ -550,9 +449,9 @@ def hece():
     Dev = Menu(hax)
     hax.config(menu=Dev)
     hskin = Menu(Dev, tearoff=0)
-    hskin.add_radiobutton(label="Skin1", command=skinsc1)
-    hskin.add_radiobutton(label="Skin2", command=skinsc2)
-    hskin.add_radiobutton(label="Skin3", command=skinsc3)
+    hskin.add_radiobutton(label="Skin1", command=lambda : genskin(7))
+    hskin.add_radiobutton(label="Skin2", command=lambda : genskin(8))
+    hskin.add_radiobutton(label="Skin3", command=lambda : genskin(9))
     Dev.add_cascade(label="Secret Skin", menu=hskin, underline=0)
     l = Label(hax, text = speed, bd = 0)
     l.place(x=140, y=86)
@@ -602,7 +501,7 @@ def hece():
     #if there are more custom var,put it inside string below
     l = Label(hax, text = "Enter debug command below!", bd=0)
     l.place(x=0, y=111)
-    button3 = ttk.Button(hax, text="Run command!", command=lambda: exec("global bg, label1, label2, speed, boostvar, skin, music, Autovar, Trailvar, url, loaded, txt, cod, cod16, console_toggle, root, data, rgbvar\n"+cmd_entry.get()))
+    button3 = ttk.Button(hax, text="Run command!", command=lambda: exec("global bg, label1, label2, speed, boostvar, o, skin, music, Autovar, Trailvar, url, loaded, txt, cod, cod16, console_toggle, root, data, rgbvar\n"+cmd_entry.get()))
     button3.place(x=5, y=170)
     def keypress_handler(event):
         global last_key
@@ -942,7 +841,7 @@ while running == 1:
         skin.add_radiobutton(label="Potato", command=lambda:turtle.shape("potato.gif"))
         skin.add_radiobutton(label="Brick", command=lambda:turtle.shape("brick.gif"))
         skin.add_radiobutton(label="Cat", command=lambda:turtle.shape("cat.gif"))
-        skin.add_radiobutton(label="Ronaldo2", command=lambda:turtle.shape("rol2.gif"))
+        skin.add_radiobutton(label="Ronaldo2", command=lambda:turtle.shape("ronadol2.gif"))
         menubar.add_cascade(label="Skin", menu=skin)
         music = Menu(menubar, tearoff=0)
         music.add_radiobutton(label="CTAC(Default)", command=lambda:winsound.PlaySound('main.wav', winsound.SND_ASYNC | winsound.SND_LOOP))
