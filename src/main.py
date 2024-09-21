@@ -1,24 +1,24 @@
 #import
-import turtle, random, winsound, webbrowser, sys, base64, string, gc, json, ctypes, os, time,urllib, requests, threading
+import turtle, random, winsound, webbrowser, sys, base64, string, gc, json, ctypes, os, time,urllib, requests, threading, subprocess, re
 import tkinter as tk
 from tkinter import ttk
 from tkinter import *
 import tkinter.messagebox
+from tkinter import colorchooser
+from pathlib import Path
 ctypes.windll.user32.ShowWindow(ctypes.windll.kernel32.GetConsoleWindow(), 0)
-if getattr(sys, 'frozen', False):
-    application_path = os.path.dirname(sys.executable)
-elif __file__:
-    application_path = os.path.dirname(__file__)
-if os.path.isfile(os.path.join(application_path, "savefile.json")):
+newpath = os.path.join(os.environ['LOCALAPPDATA'], "AmogusClick")    
+Path(newpath).mkdir(parents=True, exist_ok=True)
+if os.path.isfile(os.path.join(newpath, "savefile.json")):
     pass
-elif not os.path.isfile(os.path.join(application_path, "savefile.json")):
-    with open("savefile.json", 'w+') as file:
+elif not os.path.isfile(os.path.join(newpath, "savefile.json")):
+    with open(os.path.join(newpath, "savefile.json"), 'w+') as file:
         file.write('{"highscore":0}')
         file.close()
-if os.path.isfile(os.path.join(application_path, "settings.json")):
+if os.path.isfile(os.path.join(newpath, "settings.json")):
     pass
-elif not os.path.isfile(os.path.join(application_path, "settings.json")):
-    with open("settings.json", 'w+') as file:
+elif not os.path.isfile(os.path.join(newpath, "settings.json")):
+    with open(os.path.join(newpath, "settings.json"), 'w+') as file:
         file.write('{"lastskin":1, "lastmusic":0, "lastauto":0, "lastboost":0, "lasttrail":0, "lastcons":false, "lastspeed":5, "lastrgb":0, "lastbgcolor":[0, 0, 0], "lasttrailcolor":[255, 0, 0]}')
         file.close()
 else:
@@ -64,7 +64,7 @@ loaded=0
 console_toggle = 0
 data=0
 settings=0
-current="1.17"
+current="1.18"
 url="https://youtu.be/dQw4w9WgXcQ"
 last_key = None
 act="hax.bind('<KeyPress>', keypress_handler)"
@@ -123,7 +123,7 @@ def bgfg():
 #loadsettings
 def loadsettings():
     global settings
-    with open("settings.json", "r") as settingsfile:
+    with open(os.path.join(newpath, "settings.json"), "r") as settingsfile:
         global settings
         try:
             global settings, music, skin, Autovar, boostvar, Trailvar, console_toggle, speed, rgbvar, clbg, colr
@@ -141,7 +141,7 @@ def loadsettings():
             apply2()
         except:
             tkinter.messagebox.showinfo("Config file error", "Invalid config file detected! Attempted to reset")
-            with open("settings.json", 'w+') as rsettingfile:
+            with open(os.path.join(newpath, "settings.json"), 'w+') as rsettingfile:
                 rsettingfile.write('{"lastskin":1, "lastmusic":0, "lastauto":0, "lastboost":0, "lasttrail":0, "lastcons":false, "lastspeed":5, "lastrgb":0, "lastbgcolor":[0, 0, 0], "lasttrailcolor":[255, 0, 0]}')
                 rsettingfile.close()
 def savesettings():
@@ -172,10 +172,10 @@ def savesettings():
                     "lastbgcolor":clbg,
                     "lasttrailcolor":colr,
             }
-    with open("settings.json", 'w') as wsettingfile:
+    with open(os.path.join(newpath, "settings.json"), 'w') as wsettingfile:
         json.dump(settingssave, wsettingfile)
 def resetsettings():
-    with open("settings.json", 'w+') as wsettingfile:
+    with open(os.path.join(newpath, "settings.json"), 'w+') as wsettingfile:
         wsettingfile.write('{"lastskin":1, "lastmusic":0, "lastauto":0, "lastboost":0, "lasttrail":0, "lastcons":false, "lastspeed":5, "lastrgb":0, "lastbgcolor":[0, 0, 0], "lasttrailcolor":[255, 0, 0]}')
         wsettingfile.close()
 #skinfunc
@@ -213,10 +213,10 @@ def updatecheck():
         if msg_box == 'yes':
             def upd():
                 newVersion = requests.get("https://github.com/enderMinecraft/AmogusCLICK/releases/latest/download/Installer.exe")
-                open("installer.exe", "wb").write(newVersion.content)
+                open(os.path.join(newpath, "installer.exe"), "wb").write(newVersion.content)
                 qsn = msg_box = tk.messagebox.askquestion(" ", "Download complete! Would you want to install update right now?")
                 if qsn == 'yes':
-                    os.system("start .\installer.exe")
+                    os.system("start %Localappdata%\\AmogusClick\\installer.exe")
                     os.kill(os.getpid(), True)
                 if qsn == 'no':
                     updthread.Terminate()
@@ -247,14 +247,14 @@ def rig():
 #filesave
 def read():
     global data
-    with open("savefile.json", "r") as infile:
+    with open(os.path.join(newpath, "savefile.json"), "r") as infile:
         global data
         try:
             global data
             data = json.load(infile)
         except:
             tkinter.messagebox.showinfo("Savefile error", "Invalid savefile detected")
-            with open("savefile.json", 'w+') as file:
+            with open(os.path.join(newpath, "savefile.json"), 'w+') as file:
                 file.write('{"highscore":0}')
                 file.close()
     infile.close()
@@ -262,7 +262,7 @@ def resetsavefile():
     resetsvf = {
                 "highscore": 0,
             }
-    with open("savefile.json", "w") as outfile:
+    with open(os.path.join(newpath, "savefile.json"), "w") as outfile:
                 json.dump(resetsvf, outfile)
     read()
 read()
@@ -354,6 +354,7 @@ savemenu.add_command(label="Reset Progress", command=resetsavefile)
 savemenu.add_command(label="Load Settings", command=loadsettings)
 savemenu.add_command(label="Save Settings", command=savesettings)
 savemenu.add_command(label="Reset Settings", command=resetsettings)
+savemenu.add_command(label="Open Savefile Folder", command=lambda: subprocess.Popen("explorer " + newpath))
 menubar.add_cascade(label="Savefile", menu=savemenu)
 
 helpmenu = Menu(menubar, tearoff=0)
@@ -395,29 +396,33 @@ def callback1(box, arg):
     global colr
     global le
     arg = arg.get()
-    if len(arg) != 7:
+    match = re.search(r'^#(?:[0-9a-fA-F]{3}){1,2}$', arg)
+    if match:
+        colr = h2rgb(arg)
+        l1 = Label(hax, text = "     ", bd = 0, bg = arg)
+        l1.place(x=282, y=3)
+        l1.bind("<Button-1>", lambda e:colorpicker1())
+    else:
         le = Label(hax, text = "Invalid Hex value\n(e.g. #42e0f5)", fg="#ff1605", bd=1)
         le.place(x=90, y=50)
         le.after(1000, le.destroy)
         box.delete(0, tk.END)
-    else:
-       colr = h2rgb(arg)
-       l1 = Label(hax, text = "     ", bd = 0, bg = arg)
-       l1.place(x=282, y=3)
 
 def callback2(box, arg):
     global clbg
     global le
     arg = arg.get()
-    if len(arg) != 7:
+    match = re.search(r'^#(?:[0-9a-fA-F]{3}){1,2}$', arg)
+    if match:
+        clbg = h2rgb(arg)
+        l2 = Label(hax, text = "     ", bd = 0, bg = arg)
+        l2.place(x=282, y=33)
+        l2.bind("<Button-1>", lambda e:colorpicker2())
+    else:
         le = Label(hax, text = "Invalid Hex value\n(e.g. #42e0f5)", fg="#ff1605", bd=1)
         le.place(x=90, y=50)
         le.after(1000, le.destroy)
         box.delete(0, END)
-    else:
-       clbg = h2rgb(arg)
-       l1 = Label(hax, text = "     ", bd = 0, bg = arg)
-       l1.place(x=282, y=33)
 
 def h2rgb(value):
     value = value.lstrip('#')
@@ -429,13 +434,44 @@ def randomcl1(r, g ,b):
     hexcl1 = '#{:02x}{:02x}{:02x}'.format(r, g, b)
     l1 = Label(hax, text = "     ", bd = 0, bg = hexcl1)
     l1.place(x=282, y=3)
+    l1.bind("<Button-1>", lambda e:colorpicker1())
     
 def randomcl2(r, g ,b):
     global clbg
     clbg = (r, g, b)
     hexcl2 = '#{:02x}{:02x}{:02x}'.format(r, g, b)
-    l1 = Label(hax, text = "     ", bd = 0, bg = hexcl2)
-    l1.place(x=282, y=33)
+    l2 = Label(hax, text = "     ", bd = 0, bg = hexcl2)
+    l2.place(x=282, y=33)
+    l2.bind("<Button-1>", lambda e:colorpicker2())
+
+def colorpicker1():
+    global colr
+    color_code = colorchooser.askcolor(title ="Choose color") 
+    if color_code[1] == None:
+        pass
+    else:    
+        hexcl1= color_code[1]
+        l1 = Label(hax, text = "     ", bd = 0, bg = hexcl1)
+        l1.place(x=282, y=3)
+        l1.bind("<Button-1>", lambda e:colorpicker1())
+    if color_code[0] == None:
+        pass
+    else:    
+        colr = color_code[0]
+def colorpicker2():
+    global clbg
+    color_code = colorchooser.askcolor(title ="Choose color")
+    if color_code[1] == None:
+        pass
+    else:    
+        hexcl2= color_code[1]
+        l2 = Label(hax, text = "     ", bd = 0, bg = hexcl2)
+        l2.place(x=282, y=33)
+        l2.bind("<Button-1>", lambda e:colorpicker2())
+    if color_code[0] == None:
+        pass
+    else:    
+        clbg = color_code[0]
 
 def hece():
     global hax
@@ -477,6 +513,13 @@ def hece():
     btn.place(x=260, y=30)
     bg_entry=ttk.Entry(hax, textvariable=cl2, width=6)
     bg_entry.place(x=190, y=30)
+    l1 = Label(hax, text = "     ", bd = 0, bg = "#ffffff")
+    l1.place(x=282, y=3)
+    l2 = Label(hax, text = "     ", bd = 0, bg = "#000000")
+    l2.place(x=282, y=33)
+    
+    l1.bind("<Button-1>", lambda e:colorpicker1())
+    l2.bind("<Button-1>", lambda e:colorpicker2())
     
     separator = ttk.Separator(hax, orient='vertical')
     separator.place(relx=0.2, rely=0, relheight=0.4)
@@ -798,7 +841,7 @@ while running == 1:
             savefile = {
                 "highscore": n,
             }
-            with open("savefile.json", "w") as outfile:
+            with open(os.path.join(newpath, "savefile.json"), "w") as outfile:
                 json.dump(savefile, outfile)
     def pause():
         global n
@@ -856,6 +899,7 @@ while running == 1:
         savemenu.add_command(label="Reset Progress", command=resetsavefile)
         savemenu.add_command(label="Save Settings", command=savesettings)
         savemenu.add_command(label="Reset Settings", command=resetsettings)
+        savemenu.add_command(label="Open Save Folder", command=lambda: subprocess.Popen("explorer " + newpath))
         menubar.add_cascade(label="Savefile", menu=savemenu)
         def rpl():
             global n
@@ -897,4 +941,3 @@ while running == 1:
         turtle.bye()
         break
         wn.bye()
-gc.collect()
