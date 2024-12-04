@@ -7,6 +7,10 @@ import tkinter.messagebox
 from tkinter import colorchooser
 from pathlib import Path
 ctypes.windll.user32.ShowWindow(ctypes.windll.kernel32.GetConsoleWindow(), 0)
+if getattr(sys, 'frozen', False):
+    bin_path = os.path.dirname(sys.executable)
+elif __file__:
+    bin_path = os.path.dirname(__file__)
 newpath = os.path.join(os.environ['LOCALAPPDATA'], "AmogusClick")    
 Path(newpath).mkdir(parents=True, exist_ok=True)
 if os.path.isfile(os.path.join(newpath, "savefile.json")):
@@ -31,18 +35,19 @@ def apply2():
         ctypes.windll.user32.ShowWindow(ctypes.windll.kernel32.GetConsoleWindow(), 0)
     console_toggle = not console_toggle
 #tk
+print(bin_path)
 root = tkinter.Tk()
 root.geometry('400x450')
 root.title("Main menu")
 root.resizable(False, False)
-root.iconbitmap('icon.ico')
+root.iconbitmap(os.path.join(bin_path, "icon.ico"))
 def on_exit():
     ctypes.windll.user32.ShowWindow(ctypes.windll.kernel32.GetConsoleWindow(), 4)
     root.destroy()
     sys.exit()
 root.protocol("WM_DELETE_WINDOW", on_exit)
 #bglabelset
-bg = PhotoImage(file = "skin1.gif")
+bg = PhotoImage(file = os.path.join(bin_path, "skin1.gif"))
 label1 = Label(root, image = bg)
 label1.place(x = 0,y = -1)
 label2= Label(root, image = bg)
@@ -86,35 +91,35 @@ def bgfg():
     label1.destroy()
     label2.destroy()
     if skin==1:
-        bg = PhotoImage(file = "skin1.gif")
+        bg = PhotoImage(file = os.path.join(bin_path,"skin1.gif"))
     elif skin==2:
-        bg = PhotoImage(file = "skin2.gif")
+        bg = PhotoImage(file = os.path.join(bin_path,"skin2.gif"))
     elif skin==3:
-        bg = PhotoImage(file = "skin3.gif")
+        bg = PhotoImage(file = os.path.join(bin_path,"skin3.gif"))
     elif skin==4:
-        bg = PhotoImage(file = "skin4.gif")
+        bg = PhotoImage(file = os.path.join(bin_path,"skin4.gif"))
     elif skin==5:
-        bg = PhotoImage(file = "egg.gif")
+        bg = PhotoImage(file = os.path.join(bin_path,"egg.gif"))
     elif skin==6:
-        bg = PhotoImage(file = "gegg.gif")
+        bg = PhotoImage(file = os.path.join(bin_path,"gegg.gif"))
     elif skin==10:
-        bg = PhotoImage(file = "mono.gif")
+        bg = PhotoImage(file = os.path.join(bin_path,"mono.gif"))
     elif skin==11:
-        bg = PhotoImage(file = "ronaldo.gif")
+        bg = PhotoImage(file = os.path.join(bin_path,"ronaldo.gif"))
     elif skin==12:
-        bg = PhotoImage(file = "chad.gif")
+        bg = PhotoImage(file = os.path.join(bin_path,"chad.gif"))
     elif skin==13:
-        bg = PhotoImage(file = "chip.gif")
+        bg = PhotoImage(file = os.path.join(bin_path,"chip.gif"))
     elif skin==14:
-        bg = PhotoImage(file = "potato.gif")
+        bg = PhotoImage(file = os.path.join(bin_path,"potato.gif"))
     elif skin==15:
-        bg = PhotoImage(file = "brick.gif")
+        bg = PhotoImage(file = os.path.join(bin_path,"brick.gif"))
     elif skin==16:
-        bg = PhotoImage(file = "cat.gif")
+        bg = PhotoImage(file = os.path.join(bin_path,"cat.gif"))
     elif skin==17:
-        bg = PhotoImage(file = "ronaldo2.gif")
+        bg = PhotoImage(file = os.path.join(bin_path,"ronaldo2.gif"))
     elif skin==127:
-        bg = PhotoImage(file = "skin50.gif")
+        bg = PhotoImage(file = os.path.join(bin_path,"skin50.gif"))
     label1 = Label(root, image = bg)
     label1.place(x = 0,y = -1)
     label2= Label(root, image = bg)
@@ -579,37 +584,37 @@ wn.title(0)
 wn.bgcolor(clbg)
 running = 1
 paused = 0
-turtle.register_shape('skin1.gif')
-turtle.register_shape('skin2.gif')
-turtle.register_shape('skin3.gif')
-turtle.register_shape('skin4.gif')
-turtle.register_shape('egg.gif')
-turtle.register_shape('gegg.gif')
-turtle.register_shape('mono.gif')
-turtle.register_shape('skin50.gif')
-turtle.register_shape('rick.gif')
-turtle.register_shape('ronaldo.gif')
-turtle.register_shape('chad.gif')
-turtle.register_shape('chip.gif')
-turtle.register_shape('potato.gif')
-turtle.register_shape('brick.gif')
-turtle.register_shape('cat.gif')
-turtle.register_shape('ronaldo2.gif')
+turtle.register_shape(os.path.join(bin_path,'skin1.gif'))
+turtle.register_shape(os.path.join(bin_path,'skin2.gif'))
+turtle.register_shape(os.path.join(bin_path,'skin3.gif'))
+turtle.register_shape(os.path.join(bin_path,'skin4.gif'))
+turtle.register_shape(os.path.join(bin_path,'egg.gif'))
+turtle.register_shape(os.path.join(bin_path,'gegg.gif'))
+turtle.register_shape(os.path.join(bin_path,'mono.gif'))
+turtle.register_shape(os.path.join(bin_path,'skin50.gif'))
+turtle.register_shape(os.path.join(bin_path,'rick.gif'))
+turtle.register_shape(os.path.join(bin_path,'ronaldo.gif'))
+turtle.register_shape(os.path.join(bin_path,'chad.gif'))
+turtle.register_shape(os.path.join(bin_path,'chip.gif'))
+turtle.register_shape(os.path.join(bin_path,'potato.gif'))
+turtle.register_shape(os.path.join(bin_path,'brick.gif'))
+turtle.register_shape(os.path.join(bin_path,'cat.gif'))
+turtle.register_shape(os.path.join(bin_path,'ronaldo2.gif'))
 wn.setup(1000,700)
 if(music==0):
-    winsound.PlaySound("main.wav", winsound.SND_ASYNC | winsound.SND_LOOP)
+    winsound.PlaySound(os.path.join(bin_path,"main.wav"), winsound.SND_ASYNC | winsound.SND_LOOP)
 elif(music==1):
-    winsound.PlaySound("mono.wav", winsound.SND_ASYNC | winsound.SND_LOOP)
+    winsound.PlaySound(os.path.join(bin_path,"mono.wav"), winsound.SND_ASYNC | winsound.SND_LOOP)
 elif(music==2):
-    winsound.PlaySound("rick.wav", winsound.SND_ASYNC | winsound.SND_LOOP)
+    winsound.PlaySound(os.path.join(bin_path,"rick.wav"), winsound.SND_ASYNC | winsound.SND_LOOP)
 elif(music==3):
-    winsound.PlaySound("rol.wav", winsound.SND_ASYNC | winsound.SND_LOOP)
+    winsound.PlaySound(os.path.join(bin_path,"rol.wav"), winsound.SND_ASYNC | winsound.SND_LOOP)
 elif(music==4):
-    winsound.PlaySound("chip.wav", winsound.SND_ASYNC | winsound.SND_LOOP)
+    winsound.PlaySound(os.path.join(bin_path,"chip.wav"), winsound.SND_ASYNC | winsound.SND_LOOP)
 elif(music==5):
-    winsound.PlaySound("chad.wav", winsound.SND_ASYNC | winsound.SND_LOOP)
+    winsound.PlaySound(os.path.join(bin_path,"chad.wav"), winsound.SND_ASYNC | winsound.SND_LOOP)
 elif(music==6):
-    winsound.PlaySound("brick.wav", winsound.SND_ASYNC | winsound.SND_LOOP)
+    winsound.PlaySound(os.path.join(bin_path,"brick.wav"), winsound.SND_ASYNC | winsound.SND_LOOP)
 if (skin==127):
     n=500000
     o=127
@@ -638,71 +643,71 @@ wn.title(n)
 #asset
 if (skin==1):
     turtle.shape("skin1.gif")
-    img = tkinter.Image("photo", file = "skin1.gif")
+    img = tkinter.Image("photo", file = os.path.join(bin_path,"skin1.gif"))
     turtle._Screen._root.iconphoto(True, img)
 elif (skin==2):
     turtle.shape("skin2.gif")
-    img = tkinter.Image("photo", file = "skin2.gif")
+    img = tkinter.Image("photo", file = os.path.join(bin_path,"skin2.gif"))
     turtle._Screen._root.iconphoto(True, img)
 elif (skin==3):
     turtle.shape("skin3.gif")
-    img = tkinter.Image("photo", file = "skin3.gif")
+    img = tkinter.Image("photo", file = os.path.join(bin_path,"skin3.gif"))
     turtle._Screen._root.iconphoto(True, img)
 elif (skin==4):
     turtle.shape("skin4.gif")
-    img = tkinter.Image("photo", file = "skin4.gif")
+    img = tkinter.Image("photo", file = os.path.join(bin_path,"skin4.gif"))
     turtle._Screen._root.iconphoto(True, img)
 elif (skin==5):
     turtle.shape("egg.gif")
-    img = tkinter.Image("photo", file = "egg.gif")
+    img = tkinter.Image("photo", file = os.path.join(bin_path,"egg.gif"))
     turtle._Screen._root.iconphoto(True, img)
 elif (skin==6):
     turtle.shape("gegg.gif")
-    img = tkinter.Image("photo", file = "gegg.gif")
+    img = tkinter.Image("photo", file = os.path.join(bin_path,"gegg.gif"))
     turtle._Screen._root.iconphoto(True, img)
 elif (skin==7):
     turtle.shape("rick.gif")
-    img = tkinter.Image("photo", file = "rick.gif")
+    img = tkinter.Image("photo", file = os.path.join(bin_path,"rick.gif"))
     turtle._Screen._root.iconphoto(True, img)
 elif (skin==8):
-    turtle.shape("gegg.gif")
+    turtle.shape(os.path.join(bin_path,"gegg.gif"))
 elif (skin==9):
-    turtle.shape("gegg.gif")
+    turtle.shape(os.path.join(bin_path,"gegg.gif"))
 elif (skin==127):
-    turtle.shape("skin50.gif")
-    img = tkinter.Image("photo", file = "skin50.gif")
+    turtle.shape(os.path.join(bin_path,"skin50.gif"))
+    img = tkinter.Image("photo", file = os.path.join(bin_path,"skin50.gif"))
     turtle._Screen._root.iconphoto(True, img)
 elif (skin==10):
     turtle.shape("mono.gif")
-    img = tkinter.Image("photo", file = "mono.gif")
+    img = tkinter.Image("photo", file = os.path.join(bin_path,"mono.gif"))
     turtle._Screen._root.iconphoto(True, img)
 elif (skin==11):
     turtle.shape("ronaldo.gif")
-    img = tkinter.Image("photo", file = "ronaldo.gif")
+    img = tkinter.Image("photo", file = os.path.join(bin_path,"ronaldo.gif"))
     turtle._Screen._root.iconphoto(True, img)
 elif (skin==12):
     turtle.shape("chad.gif")
-    img = tkinter.Image("photo", file = "chad.gif")
+    img = tkinter.Image("photo", file = os.path.join(bin_path,"chad.gif"))
     turtle._Screen._root.iconphoto(True, img)
 elif (skin==13):
     turtle.shape("chip.gif")
-    img = tkinter.Image("photo", file = "chip.gif")
+    img = tkinter.Image("photo", file = os.path.join(bin_path,"chip.gif"))
     turtle._Screen._root.iconphoto(True, img)
 elif (skin==14):
     turtle.shape("potato.gif")
-    img = tkinter.Image("photo", file = "potato.gif")
+    img = tkinter.Image("photo", file = os.path.join(bin_path,"potato.gif"))
     turtle._Screen._root.iconphoto(True, img)
 elif (skin==15):
     turtle.shape("brick.gif")
-    img = tkinter.Image("photo", file = "brick.gif")
+    img = tkinter.Image("photo", file = os.path.join(bin_path,"brick.gif"))
     turtle._Screen._root.iconphoto(True, img)
 elif (skin==16):
     turtle.shape("cat.gif")
-    img = tkinter.Image("photo", file = "cat.gif")
+    img = tkinter.Image("photo", file = os.path.join(bin_path,"cat.gif"))
     turtle._Screen._root.iconphoto(True, img)
 elif (skin==17):
     turtle.shape("ronaldo2.gif")
-    img = tkinter.Image("photo", file = "ronaldo2.gif")
+    img = tkinter.Image("photo", file = os.path.join(bin_path,"ronaldo2.gif"))
     turtle._Screen._root.iconphoto(True, img)
 turtle.penup()
 if str(type(Trailvar)) == "<class 'tkinter.IntVar'>":
@@ -871,29 +876,29 @@ while running == 1:
         diff.add_radiobutton(label="Hard", command=lambda:turtle.speed(10))
         menubar.add_cascade(label="Difficulty", menu=diff)
         skin = Menu(menubar, tearoff=0)
-        skin.add_radiobutton(label="Pmogus(Default)", command=lambda:turtle.shape("skin1.gif"))
-        skin.add_radiobutton(label="Pimogus", command=lambda:turtle.shape("skin2.gif"))
-        skin.add_radiobutton(label="Bmogus", command=lambda:turtle.shape("skin3.gif"))
-        skin.add_radiobutton(label="RMOGUS", command=lambda:turtle.shape("skin4.gif"))
-        skin.add_radiobutton(label="Egg", command=lambda:turtle.shape("egg.gif"))
-        skin.add_radiobutton(label="Golden Egg", command=lambda:turtle.shape("gegg.gif"))
-        skin.add_radiobutton(label="MONO", command=lambda:turtle.shape("mono.gif"))
-        skin.add_radiobutton(label="Ronaldo", command=lambda:turtle.shape("ronaldo.gif"))
-        skin.add_radiobutton(label="GigaChad", command=lambda:turtle.shape("chad.gif"))
-        skin.add_radiobutton(label="Chip", command=lambda:turtle.shape("chip.gif"))
-        skin.add_radiobutton(label="Potato", command=lambda:turtle.shape("potato.gif"))
-        skin.add_radiobutton(label="Brick", command=lambda:turtle.shape("brick.gif"))
-        skin.add_radiobutton(label="Cat", command=lambda:turtle.shape("cat.gif"))
-        skin.add_radiobutton(label="Ronaldo2", command=lambda:turtle.shape("ronadol2.gif"))
+        skin.add_radiobutton(label="Pmogus(Default)", command=lambda:turtle.shape(os.path.join(bin_path,"skin1.gif")))
+        skin.add_radiobutton(label="Pimogus", command=lambda:turtle.shape(os.path.join(bin_path,"skin2.gif")))
+        skin.add_radiobutton(label="Bmogus", command=lambda:turtle.shape(os.path.join(bin_path,"skin3.gif")))
+        skin.add_radiobutton(label="RMOGUS", command=lambda:turtle.shape(os.path.join(bin_path,"skin4.gif")))
+        skin.add_radiobutton(label="Egg", command=lambda:turtle.shape(os.path.join(bin_path,"egg.gif")))
+        skin.add_radiobutton(label="Golden Egg", command=lambda:turtle.shape(os.path.join(bin_path,"gegg.gif")))
+        skin.add_radiobutton(label="MONO", command=lambda:turtle.shape(os.path.join(bin_path,"mono.gif")))
+        skin.add_radiobutton(label="Ronaldo", command=lambda:turtle.shape(os.path.join(bin_path,"ronaldo.gif")))
+        skin.add_radiobutton(label="GigaChad", command=lambda:turtle.shape(os.path.join(bin_path,"chad.gif")))
+        skin.add_radiobutton(label="Chip", command=lambda:turtle.shape(os.path.join(bin_path,"chip.gif")))
+        skin.add_radiobutton(label="Potato", command=lambda:turtle.shape(os.path.join(bin_path,"potato.gif")))
+        skin.add_radiobutton(label="Brick", command=lambda:turtle.shape(os.path.join(bin_path,"brick.gif")))
+        skin.add_radiobutton(label="Cat", command=lambda:turtle.shape(os.path.join(bin_path,"cat.gif")))
+        skin.add_radiobutton(label="Ronaldo2", command=lambda:turtle.shape(os.path.join(bin_path,"ronadol2.gif")))
         menubar.add_cascade(label="Skin", menu=skin)
         music = Menu(menubar, tearoff=0)
-        music.add_radiobutton(label="CTAC(Default)", command=lambda:winsound.PlaySound('main.wav', winsound.SND_ASYNC | winsound.SND_LOOP))
-        music.add_radiobutton(label="MONO", command=lambda:winsound.PlaySound('mono.wav', winsound.SND_ASYNC | winsound.SND_LOOP))
-        music.add_radiobutton(label="Rick", command=lambda:winsound.PlaySound('rick.wav', winsound.SND_ASYNC | winsound.SND_LOOP))
-        music.add_radiobutton(label="Ronaldo", command=lambda:winsound.PlaySound('rol.wav', winsound.SND_ASYNC | winsound.SND_LOOP))
-        music.add_radiobutton(label="Potato&Chips", command=lambda:winsound.PlaySound('chip.wav', winsound.SND_ASYNC | winsound.SND_LOOP))
-        music.add_radiobutton(label="Chad", command=lambda:winsound.PlaySound('chad.wav', winsound.SND_ASYNC | winsound.SND_LOOP))
-        music.add_radiobutton(label="Brick", command=lambda:winsound.PlaySound('brick.wav', winsound.SND_ASYNC | winsound.SND_LOOP))
+        music.add_radiobutton(label="CTAC(Default)", command=lambda:winsound.PlaySound(os.path.join(bin_path,'main.wav'), winsound.SND_ASYNC | winsound.SND_LOOP))
+        music.add_radiobutton(label="MONO", command=lambda:winsound.PlaySound(os.path.join(bin_path,'mono.wav'), winsound.SND_ASYNC | winsound.SND_LOOP))
+        music.add_radiobutton(label="Rick", command=lambda:winsound.PlaySound(os.path.join(bin_path,'rick.wav'), winsound.SND_ASYNC | winsound.SND_LOOP))
+        music.add_radiobutton(label="Ronaldo", command=lambda:winsound.PlaySound(os.path.join(bin_path,'rol.wav'), winsound.SND_ASYNC | winsound.SND_LOOP))
+        music.add_radiobutton(label="Potato&Chips", command=lambda:winsound.PlaySound(os.path.join(bin_path,'chip.wav'), winsound.SND_ASYNC | winsound.SND_LOOP))
+        music.add_radiobutton(label="Chad", command=lambda:winsound.PlaySound(os.path.join(bin_path,'chad.wav'), winsound.SND_ASYNC | winsound.SND_LOOP))
+        music.add_radiobutton(label="Brick", command=lambda:winsound.PlaySound(os.path.join(bin_path,'brick.wav'), winsound.SND_ASYNC | winsound.SND_LOOP))
         menubar.add_cascade(label="Music", menu=music)
         savemenu = Menu(menubar, tearoff=0)
         savemenu.add_command(label="Reset Progress", command=resetsavefile)
