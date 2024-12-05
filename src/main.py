@@ -784,8 +784,8 @@ while running == 1:
     x = turtle.xcor()
     y = turtle.ycor()
     if (paused==0):
-        xm = x+xin+4
-        ym = y+yin+2
+        xm = x+xin
+        ym = y+yin
     else:
         pass
     if (running==0):
@@ -799,13 +799,13 @@ while running == 1:
         winsound.PlaySound(None, winsound.SND_FILENAME)
         turtle.bye()
         break
-    if (ym>=wn.window_height()/2 or ym<=-wn.window_height()/2 , xm>=wn.window_width()/2 or xm<=-wn.window_width()/2):
-        xin=-0.4*xin
+    if turtle.xcor() >= wn.window_width()/2 or turtle.xcor() <=-wn.window_width()/2:
+        xin = xin * -1
+    if turtle.ycor() >= wn.window_height()/2 or turtle.ycor() <=-wn.window_height()/2:
+        yin = yin * -1
     if (running==0):
         winsound.PlaySound(None, winsound.SND_FILENAME)
         break
-    if (xm>=wn.window_width()/2 or xm<=-wn.window_width()/2 , ym>=wn.window_height()/2 or ym<=-wn.window_height()/2):
-        yin=-0.4*yin
     if (running==0):
         winsound.PlaySound(None, winsound.SND_FILENAME)
         turtle.bye()
