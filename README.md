@@ -3,14 +3,14 @@ CLICK THE AMOGUS
 
 Inspired by ClckCTAC.exe by Endermanch
 
-Good news! Now support both x64 and x86
+Using Python 3.12 x64 (Windows 8 x64 and newer)
 
 # Build
 Run insreqlib.bat to install pyinstaller and build 
 
 or
 
-Using build.bat to build only(insreqlib.bat recommended)
+Using build.bat to build only (insreqlib.bat recommended)
 
 Compiled EXE and resources will be placed in 'output' folder
 
@@ -31,4 +31,4 @@ Chips: https://www.youtube.com/watch?v=WIRK_pGdIdA
 Feel Good: https://www.youtube.com/watch?v=E-wrKG0yUVA
 
 # Website
-EnderMinecraft.github.io/home.html
+EnderMinecraft.github.io
